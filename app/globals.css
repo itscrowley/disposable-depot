@@ -87,42 +87,49 @@ header.scrolled { top: 10px; }
 .brand { display: flex; justify-content: center; align-items: center; width: 100%; }
 .logo-img { height: 60px; width: auto; max-width: 100%; object-fit: cover; display: block; border-radius: 50px; }
 
-/* ================= HERO SECTION (FIXED & CENTERED) ================= */
+/* ================= HERO SECTION (PARALLAX + BLUR FIX) ================= */
+
 .parallax-wrapper { position: relative; width: 100%; overflow: hidden; }
 
-/* 1. Main Hero Container - Centering Fix */
+/* Main Hero Container */
 .hero {
-  width: 100%; /* Important: Full Width */
-  min-height: 85vh; /* Height fix */
-  display: flex; /* Flexbox On */
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center Horizontally (Left-Right) */
-  justify-content: center; /* Center Vertically (Top-Bottom) */
-  text-align: center; /* Text Center */
+  width: 100%; 
+  min-height: 85vh; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  text-align: center; 
   padding-top: 150px; 
   padding-bottom: 50px;
   position: relative;
-  overflow: hidden;
+  /* Overflow hidden zaroori hai taaki blurred edges bahar na nikle */
+  overflow: hidden; 
 }
 
-/* 2. Blurred Background Image */
+/* Background Image Layer */
 .hero::before {
   content: '';
   position: absolute;
-  inset: 0;
+  /* Transform hata diya, ab hum Inset se zoom karenge taaki Parallax na toote */
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  
   background-image: url("https://images.unsplash.com/photo-1645047059915-ae0b25f3bb60?q=80&w=1332&auto=format&fit=crop");
-  background-attachment: fixed;
+  /* Ye line PARALLAX effect wapas layegi */
+  background-attachment: fixed; 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   
-  /* Blur Settings */
+  /* Blur Effect */
   filter: blur(8px); 
-  transform: scale(1.1); 
   z-index: -2;
 }
 
-/* 3. Gradient Overlay */
+/* Gradient Overlay */
 .hero::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(to bottom, rgba(0,0,0,0.05), var(--bg-body));
