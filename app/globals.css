@@ -65,7 +65,7 @@ header.scrolled { top: 10px; }
 .logo-img { height: 60px; width: auto; max-width: 100%; object-fit: cover; display: block; border-radius: 50px; }
 
 
-/* ================= HERO SECTION (PARALLAX + GLASS BOXES) ================= */
+/* ================= HERO SECTION (PARALLAX + STRONG GLASSMORPHISM) ================= */
 
 .parallax-wrapper { position: relative; width: 100%; overflow: hidden; }
 
@@ -82,15 +82,15 @@ header.scrolled { top: 10px; }
   padding-bottom: 50px;
   position: relative;
   
-  /* Clear Background Image with Parallax */
+  /* Clear Background Image */
   background-image: url("https://images.unsplash.com/photo-1645047059915-ae0b25f3bb60?q=80&w=1332&auto=format&fit=crop");
-  background-attachment: fixed;
+  background-attachment: fixed; /* Parallax Effect */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-/* Gradient Overlay (Slightly Darker) */
+/* Gradient Overlay (Thoda dark taaki text pop kare) */
 .hero::after {
   content: ''; 
   position: absolute; 
@@ -99,7 +99,7 @@ header.scrolled { top: 10px; }
   z-index: 1;
 }
 
-/* 2. TEXT BOX (FROSTED GLASS BLUR) */
+/* 2. TEXT BOX (HEAVY FROSTED GLASS) */
 .hero-content {
   position: relative; 
   z-index: 2;
@@ -108,18 +108,25 @@ header.scrolled { top: 10px; }
   padding: 50px 40px; 
   margin: 0 20px;
   border-radius: 40px;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.15);
   animation: fadeInUp 1s ease-out;
   
-  /* --- BLUR MAGIC YAHAN HAI --- */
-  background: rgba(255, 255, 255, 0.15); /* Transparent White */
-  backdrop-filter: blur(20px) saturate(180%); /* Strong Blur behind box */
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Shiny Border */
+  /* --- GLASS EFFECT SETTINGS --- */
+  background: rgba(255, 255, 255, 0.1); /* Bahut halka safed */
+  
+  /* Ye line MAGIC karegi (Peeche ka blur) */
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  
+  /* Borders and Shadow */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
 }
+
+/* Dark Mode Version */
 body.dark-mode .hero-content {
-  background: rgba(30, 41, 59, 0.4); /* Transparent Black for Dark Mode */
+  background: rgba(15, 23, 42, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 .hero-content h1 { font-size: 42px; margin-bottom: 16px; color: var(--text-main); text-shadow: 0 1px 3px rgba(255,255,255,0.4); }
@@ -143,23 +150,27 @@ body.dark-mode .hero-content h1 { text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
   100% { box-shadow: 0 0 10px rgba(37, 211, 102, 0.5); }
 }
 
-/* 3. CALL BUTTON & SWITCH ROW (FROSTED GLASS BLUR) */
+/* 3. BUTTON & TOGGLE ROW (HEAVY FROSTED GLASS) */
 .hero-actions-row {
   position: relative; 
   z-index: 5;
   display: flex; justify-content: center; align-items: center;
   gap: 20px; margin-top: 30px;
   padding: 12px 30px; border-radius: 50px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 
-  /* --- BLUR MAGIC YAHAN BHI --- */
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  /* --- GLASS EFFECT SETTINGS --- */
+  background: rgba(255, 255, 255, 0.1); /* Halka safed */
+  
+  /* Blur Magic */
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  
   border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
+
 body.dark-mode .hero-actions-row { 
-  background: rgba(0, 0, 0, 0.3); 
+  background: rgba(0, 0, 0, 0.4); 
   border: 1px solid rgba(255, 255, 255, 0.05); 
 }
 
@@ -169,6 +180,14 @@ body.dark-mode .hero-actions-row {
   color: #1f2937; border: 2px solid #fff;
   background: rgba(255,255,255,0.3);
   transition: 0.3s; animation: glowingWhite 2s infinite ease-in-out;
+}
+body.dark-mode .btn-hero-call { color: #fff; border-color: rgba(255,255,255,0.6); }
+.btn-hero-call:hover { background: #fff; color: var(--primary); transform: scale(1.05); }
+
+@keyframes glowingWhite {
+  0% { box-shadow: 0 0 5px rgba(255,255,255,0.3); }
+  50% { box-shadow: 0 0 15px rgba(255,255,255,0.6), 0 0 5px var(--primary); }
+  100% { box-shadow: 0 0 5px rgba(255,255,255,0.3); }
 }
 body.dark-mode .btn-hero-call { color: #fff; border-color: rgba(255,255,255,0.6); }
 .btn-hero-call:hover { background: #fff; color: var(--primary); transform: scale(1.05); }
