@@ -35,7 +35,6 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  /* Font family Next.js variable ya fallback use karega */
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
   background-color: var(--bg-body);
   color: var(--text-main);
@@ -63,36 +62,48 @@ header.scrolled { top: 10px; }
 .brand { display: flex; justify-content: center; align-items: center; width: 100%; }
 .logo-img { height: 60px; width: auto; max-width: 100%; object-fit: cover; display: block; border-radius: 50px; }
 
-/* HERO */
+/* ================= HERO SECTION (FIXED & CENTERED) ================= */
 .parallax-wrapper { position: relative; width: 100%; overflow: hidden; }
-.parallax-bg {
-  background-attachment: fixed; background-position: center;
-  background-repeat: no-repeat; background-size: cover; position: relative;
+
+/* 1. Main Hero Container - Centering Fix */
+.hero {
+  width: 100%; /* Important: Full Width */
+  min-height: 85vh; /* Height fix */
+  display: flex; /* Flexbox On */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center Horizontally (Left-Right) */
+  justify-content: center; /* Center Vertically (Top-Bottom) */
+  text-align: center; /* Text Center */
+  padding-top: 150px; 
+  padding-bottom: 50px;
+  position: relative;
+  overflow: hidden;
 }
-/* --- NAYA CODE: Background Image aur Blur yahan hai --- */
+
+/* 2. Blurred Background Image */
 .hero::before {
   content: '';
   position: absolute;
-  inset: 0; /* Poore area ko cover karega */
+  inset: 0;
   background-image: url("https://images.unsplash.com/photo-1645047059915-ae0b25f3bb60?q=80&w=1332&auto=format&fit=crop");
-  background-attachment: fixed; /* Parallax effect ke liye */
+  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   
-  /* >>> BLUR EFFECT YAHAN HAI <<< */
-  filter: blur(8px); /* 8px ko kam ya zyada karke blur adjust karein */
-  /* Thoda zoom karte hain taaki blur ke white edges na dikhein */
+  /* Blur Settings */
+  filter: blur(8px); 
   transform: scale(1.1); 
-  z-index: -2; /* Sabse peeche bhejne ke liye */
+  z-index: -2;
 }
 
-/* Gradient overlay (jo pehle se tha) ko update kiya */
+/* 3. Gradient Overlay */
 .hero::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(to bottom, rgba(0,0,0,0.05), var(--bg-body));
-  z-index: -1; /* Blurry image ke upar, lekin text ke neeche */
+  z-index: -1;
 }
+
 .hero-content {
   position: relative; z-index: 2; text-align: center;
   max-width: 800px; padding: 50px 40px; margin: 0 20px;
