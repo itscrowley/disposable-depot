@@ -10,7 +10,7 @@
   --card-bg: #ffffff;
   --glass-bg-strong: rgba(255, 255, 255, 0.25);
   --glass-border-strong: 1px solid rgba(255, 255, 255, 0.2);
-  --glass-blur-amount: 10px;
+  --glass-blur-amount: 40px;
   --glass-bg-header: rgba(255, 255, 255, 0.25);
   --shadow-color: rgba(0,0,0,0.1);
   --form-bg: #fff;
