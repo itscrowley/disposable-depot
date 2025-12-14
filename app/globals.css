@@ -114,7 +114,7 @@ header.scrolled { top: 10px; }
   background: rgba(255, 255, 255, 0.1); /* Bahut halka safed */
   
   /* Ye line MAGIC karegi (Peeche ka blur) */
-  backdrop-filter: blur(50px) saturate(200%);
+  backdrop-filter: blur(80px) saturate(200%);
   -webkit-backdrop-filter: blur(25px) saturate(200%);
   
   /* Borders and Shadow */
