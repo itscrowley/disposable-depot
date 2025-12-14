@@ -41,26 +41,28 @@ body {
 a { text-decoration: none; transition: 0.3s ease; }
 button { cursor: pointer; border: none; outline: none; }
 
-/* ================= HEADER (PILL WITH GLASSMORPHISM) ================= */
+/* ================= HEADER (ULTRA HEAVY BLUR PILL) ================= */
 header {
   position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
   width: 90%; max-width: 500px; z-index: 1000;
   display: flex; justify-content: center; align-items: center;
   padding: 8px 12px; border-radius: 50px;
   
-  /* --- GLASS EFFECT --- */
-  background: rgba(255, 255, 255, 0.3); /* Thoda safed taaki visible ho */
-  backdrop-filter: blur(90px) saturate(180%);
-  -webkit-backdrop-filter: blur(90px) saturate(180%);
+  /* --- EXTREME GLASS EFFECT --- */
+  background: rgba(255, 255, 255, 0.45); /* Thoda zyada safed taaki glass dikhe */
   
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  /* Blur ko 60px kar diya hai */
+  backdrop-filter: blur(60px) saturate(200%);
+  -webkit-backdrop-filter: blur(60px) saturate(200%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Gehra Shadow */
   transition: all 0.4s ease;
 }
 
 body.dark-mode header {
-  background: rgba(15, 23, 42, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 header.scrolled { top: 10px; }
@@ -68,7 +70,7 @@ header.scrolled { top: 10px; }
 .logo-img { height: 60px; width: auto; max-width: 100%; object-fit: cover; display: block; border-radius: 50px; }
 
 
-/* ================= HERO SECTION (FIXED PARALLAX + GLASS BOXES) ================= */
+/* ================= HERO SECTION (FIXED PARALLAX + HEAVY BLUR BOXES) ================= */
 
 .parallax-wrapper { position: relative; width: 100%; overflow: hidden; }
 
@@ -93,17 +95,16 @@ header.scrolled { top: 10px; }
   background-size: cover;
 }
 
-/* Gradient Overlay (Bahut halka kar diya hai taaki image saaf dikhe) */
+/* Gradient Overlay (Halka sa shade) */
 .hero::after {
   content: ''; 
   position: absolute; 
   inset: 0;
-  /* Sirf neeche halka sa shade diya hai taaki scroll smooth lage */
-  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.05), var(--bg-body));
+  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.1), var(--bg-body));
   z-index: 1;
 }
 
-/* 2. TEXT BOX (STRONG GLASSMORPHISM) */
+/* 2. TEXT BOX (ULTRA HEAVY GLASS) */
 .hero-content {
   position: relative; 
   z-index: 2;
@@ -114,17 +115,19 @@ header.scrolled { top: 10px; }
   border-radius: 40px;
   animation: fadeInUp 1s ease-out;
   
-  /* --- GLASS EFFECT --- */
-  background: rgba(255, 255, 255, 0.4); /* Transparent White */
-  backdrop-filter: blur(90px) saturate(180%); /* Strong Blur */
-  -webkit-backdrop-filter: blur(90px) saturate(180%);
+  /* --- EXTREME BLUR --- */
+  background: rgba(255, 255, 255, 0.25); /* 25% Visible White */
   
-  border: 1px solid rgba(255, 255, 255, 0.4); /* Shiny Border */
-  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  /* Blur 60px - Ab peeche ki cheezein gayab ho jayengi, bas colors dikhenge */
+  backdrop-filter: blur(60px) saturate(200%);
+  -webkit-backdrop-filter: blur(60px) saturate(200%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Strong Border */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Deep Shadow */
 }
 
 body.dark-mode .hero-content {
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(15, 23, 42, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -149,7 +152,7 @@ body.dark-mode .hero-content h1 { text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
   100% { box-shadow: 0 0 10px rgba(37, 211, 102, 0.5); }
 }
 
-/* 3. CALL BUTTON & SWITCH (STRONG GLASS PILL) */
+/* 3. CALL BUTTON & SWITCH (ULTRA HEAVY GLASS PILL) */
 .hero-actions-row {
   position: relative; 
   z-index: 5;
@@ -157,25 +160,27 @@ body.dark-mode .hero-content h1 { text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
   gap: 20px; margin-top: 30px;
   padding: 12px 30px; border-radius: 50px;
 
-  /* --- GLASS EFFECT --- */
-  background: rgba(255, 255, 255, 0.25); /* Visible Milky White */
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  /* --- EXTREME BLUR --- */
+  background: rgba(255, 255, 255, 0.35); /* Milky White */
   
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  /* Blur 60px */
+  backdrop-filter: blur(60px) saturate(200%);
+  -webkit-backdrop-filter: blur(60px) saturate(200%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 body.dark-mode .hero-actions-row { 
-  background: rgba(0, 0, 0, 0.5); 
-  border: 1px solid rgba(255, 255, 255, 0.1); 
+  background: rgba(0, 0, 0, 0.6); 
+  border: 1px solid rgba(255, 255, 255, 0.15); 
 }
 
 .btn-hero-call {
   padding: 10px 24px; border-radius: 30px;
   font-size: 15px; font-weight: 700; text-decoration: none;
   color: #1f2937; border: 2px solid #fff;
-  background: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.5);
   transition: 0.3s; animation: glowingWhite 2s infinite ease-in-out;
 }
 body.dark-mode .btn-hero-call { color: #fff; border-color: rgba(255,255,255,0.6); }
