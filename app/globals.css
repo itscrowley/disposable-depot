@@ -10,7 +10,7 @@
   --card-bg: #ffffff;
   --glass-bg-strong: rgba(255, 255, 255, 0.25);
   --glass-border-strong: 1px solid rgba(255, 255, 255, 0.2);
-  --glass-blur-amount: 40px;
+  --glass-blur-amount: 10px;
   --glass-bg-header: rgba(255, 255, 255, 0.25);
   --shadow-color: rgba(0,0,0,0.1);
   --form-bg: #fff;
@@ -52,7 +52,7 @@ header {
   display: flex; justify-content: center; align-items: center;
   padding: 8px 12px; border-radius: 50px;
   background: var(--glass-bg-header);
-  backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(200%) blur(50px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 10px 30px var(--shadow-color);
