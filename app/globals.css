@@ -66,7 +66,7 @@ header {
   background: rgba(255, 255, 255, 0.2);
   
   /* 2. Blur + Saturate (Ye combination hi "Frosted Glass" banata hai) */
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(80px) saturate(200%);
   -webkit-backdrop-filter: blur(80px) saturate(180%);
   
   /* 3. Shiny Border (Taaki glass ke kinare chamkein) */
