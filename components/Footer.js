@@ -15,10 +15,44 @@ const Footer = () => {
               Best quality disposable items for all your business and event needs. Wholesale rates available.
             </p>
             <div className={styles.socialLinks}>
-              <a href="#" className={styles.socialIcon}><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className={styles.socialIcon}><i className="fab fa-instagram"></i></a>
-              <a href="#" className={styles.socialIcon}><i className="fab fa-whatsapp"></i></a>
-            </div>
+    
+    {/* 1. Facebook Link */}
+    {/* "YOUR_PAGE_NAME" ki jagah apni Facebook profile/page ka naam likhein */}
+    <a 
+        href="https://www.facebook.com/TheDisposableDepot" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className={styles.socialIcon}
+        aria-label="Facebook"
+    >
+        <i className="fab fa-facebook-f"></i>
+    </a>
+
+    {/* 2. Instagram Link */}
+    {/* "YOUR_USERNAME" ki jagah apni Instagram ID likhein */}
+    <a 
+        href="https://www.instagram.com/the_disposable_depot/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className={styles.socialIcon}
+        aria-label="Instagram"
+    >
+        <i className="fab fa-instagram"></i>
+    </a>
+
+    {/* 3. WhatsApp Link (Ye Sabse Important Hai) */}
+    {/* Maine aapka number add kar diya hai (91 + 9814812623) */}
+    <a 
+        href="https://wa.me/919814812623?text=Hello,%20I%20am%20interested%20in%20your%20products." 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className={styles.socialIcon}
+        aria-label="WhatsApp"
+    >
+        <i className="fab fa-whatsapp"></i>
+    </a>
+
+</div>
           </div>
 
           {/* Quick Links */}
