@@ -39,57 +39,64 @@ body {
 a { text-decoration: none; transition: 0.3s ease; }
 button { cursor: pointer; border: none; outline: none; }
 
+/* --- HEADER CONTAINER (Sirf isko Pill banaya hai) --- */
 header {
-  /* --- POSITIONING (Center mein float karne ke liye) --- */
+  /* Positioning: Page ke center mein float karega */
   position: fixed;
-  top: 20px; /* Top se thoda neeche taaki "floating" lage */
+  top: 20px; 
   left: 50%;
-  transform: translateX(-50%); /* Exact center karne ka formula */
+  transform: translateX(-50%); /* Exact Center karne ke liye */
   z-index: 1000;
 
-  /* --- SIZE (Pill banane ke liye) --- */
-  width: 90%; /* Mobile par almost full width */
-  max-width: 1200px; /* Desktop par zyada lamba na ho */
-  padding: 10px 30px; /* Content ke andar space */
-  border-radius: 50px; /* Ye hai wo magic property jo PILL banayegi */
-
-  /* --- GLASS EFFECT --- */
-  background: rgba(255, 255, 255, 0.25); /* Transparency */
+  /* Sizing: Content ke hisaab se adjust hoga */
+  width: auto;             /* Full width hataya */
+  max-width: 90%;          /* Mobile par screen se bahar na jaye */
+  min-width: 300px;        /* Bohot chhota na ho */
+  
+  /* --- PILL SHAPE MAGIC --- */
+  border-radius: 50px;     /* Pill shape */
+  padding: 5px 25px;       /* Ye wo padding hai jo background ko content se door karegi */
+  
+  /* --- GLASS EFFECT (Original) --- */
+  background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(15px) saturate(180%);
   -webkit-backdrop-filter: blur(15px) saturate(180%);
   
-  /* --- BORDER & SHADOW --- */
   border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.4s ease;
 }
 
-/* --- DARK MODE SUPPORT --- */
+/* --- DARK MODE --- */
 body.dark-mode header {
-  background: rgba(15, 23, 42, 0.7); /* Thoda dark background */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* --- SCROLL EFFECT (Optional) --- */
-/* Jab scroll karein to pill thoda upar chipak jaye ya size change ho */
+/* --- SCROLLED STATE --- */
 header.scrolled {
   top: 10px;
-  width: 95%; /* Scroll par thoda wide ho sakta hai */
+  /* Scroll pe thoda compact kar sakte hain */
+  padding: 5px 20px; 
   backdrop-filter: blur(20px) saturate(200%);
 }
 
-.brand {
-  display: flex;
-  justify-content: space-between; /* Logo aur Menu ko door karne ke liye */
-  align-items: center;
-  width: 100%;
+/* --- INNER CONTENT (Ye waisa hi hai jaisa aapka original tha) --- */
+.brand { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  width: 100%; 
+  /* Height hatadi taaki padding apna kaam kare */
 }
 
-.logo-img {
-  height: 50px; /* Pill ke hisaab se height adjust karein */
-  width: auto;
-  border-radius: 50%; /* Logo bhi round achha lagega */
+.logo-img { 
+  height: 60px; 
+  width: auto; 
+  max-width: 100%; 
+  object-fit: cover; 
+  display: block; 
+  border-radius: 50px; /* Aapka original style */
 }
 
 /* ================= HERO SECTION (FIXED PARALLAX + GLASS BOXES) ================= */
