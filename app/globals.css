@@ -55,7 +55,7 @@ header {
   
   /* --- PILL SHAPE MAGIC --- */
   border-radius: 50px;     /* Pill shape */
-  padding: 5px 25px;       /* Ye wo padding hai jo background ko content se door karegi */
+  padding: 15px 25px;       /* Ye wo padding hai jo background ko content se door karegi */
   
   /* --- GLASS EFFECT (Original) --- */
   background: rgba(255, 255, 255, 0.25);
@@ -69,7 +69,7 @@ header {
 
 /* --- DARK MODE --- */
 body.dark-mode header {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
