@@ -312,7 +312,7 @@ body.dark-mode .marquee-track span { color: #fff; text-shadow: 0 1px 3px rgba(0,
   background-repeat: no-repeat;
 
   /* Sirf ye layer blur hogi */
-  filter: blur(8px); 
+  filter: blur(1px); 
   
   /* Content ke peeche bhejne ke liye */
   z-index: -1; 
