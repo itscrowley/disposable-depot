@@ -99,12 +99,9 @@ header.scrolled {
   border-radius: 50px; /* Aapka original style */
 }
 
-/* ================= HERO SECTION (FIXED PARALLAX + GLASS BOXES) ================= */
-
-.parallax-wrapper { position: relative; width: 100%; overflow: hidden; }
-
-/* 1. Main Hero Container (PARALLAX WAPAS AAYA) */
+/* --- HERO MAIN CONTAINER --- */
 .hero {
+  position: relative;
   width: 100%;
   min-height: 85vh;
   display: flex;
@@ -114,71 +111,70 @@ header.scrolled {
   text-align: center;
   padding-top: 150px; 
   padding-bottom: 50px;
-  position: relative;
   
-  /* --- PARALLAX IMAGE SETTINGS --- */
-  background-image: url("https://plus.unsplash.com/premium_photo-1747850753779-6d764d91935e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-  background-attachment: fixed; /* FIXED = PARALLAX */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* IMPORTANT: Yahan se background image hata di gayi hai */
+  /* Taaki blur effect confuse na ho */
+  overflow: hidden; 
 }
 
-/* Overlay (Bahut halka) */
+/* --- 2. PARALLAX BACKGROUND (New Layer) --- */
+/* Image ko yahan shift kiya gaya hai fix karne ke liye */
+.hero::before {
+  content: "";
+  position: fixed; /* Ye 'fixed' Parallax ka kaam karega */
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  
+  background-image: url("https://plus.unsplash.com/premium_photo-1747850753779-6d764d91935e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+  z-index: -1; /* Sabse peeche */
+  pointer-events: none; /* Scrolling smooth rakhne ke liye */
+}
+
+/* --- 3. DARK OVERLAY (Optional) --- */
 .hero::after {
   content: ''; 
   position: absolute; 
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.1), var(--bg-body));
-  z-index: 1;
+  /* Image ke upar halka andhera taaki text dikhe */
+  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.3));
+  z-index: 0; /* Image ke upar, content ke neeche */
 }
 
-/* 2. TEXT BOX (STRONG GLASS, LESS WHITE) */
+/* --- 4. TEXT BOX (THE GLASS EFFECT) --- */
 .hero-content {
   position: relative; 
-  z-index: 2;
+  z-index: 2; /* Sabse upar */
+  
   text-align: center;
   max-width: 800px; 
   padding: 50px 40px; 
   margin: 0 20px;
   border-radius: 40px;
-  animation: fadeInUp 1s ease-out;
   
-  /* --- GLASS EFFECT --- */
-  background: rgba(255, 255, 255, 0.1); /* Transparency Wapas */
+  /* --- BLUR MAGIC SETTINGS --- */
   
-  /* Blur 40px */
-  backdrop-filter: blur(60px) saturate(200%);
-  -webkit-backdrop-filter: blur(60px) saturate(200%);
+  /* 1. Background ko bohot transparent rakhein */
+  background: rgba(255, 255, 255, 0.1); 
   
+  /* 2. Blur value */
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  
+  /* 3. Border aur Shadow */
   border: 1px solid rgba(255, 255, 255, 0.3); 
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
+/* Dark mode adjustment */
 body.dark-mode .hero-content {
   background: rgba(15, 23, 42, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.hero-content h1 { font-size: 42px; margin-bottom: 16px; color: var(--text-main); text-shadow: 0 1px 3px rgba(255,255,255,0.4); }
-body.dark-mode .hero-content h1 { text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-.hero-content h1 span { color: var(--primary-dark); }
-.hero-content p { font-size: 17px; color: var(--text-main); margin-bottom: 30px; font-weight: 600; }
-
-.hero-cta-whatsapp {
-  display: inline-block;
-  background: linear-gradient(135deg, #25D366, #128C7E);
-  color: white; padding: 16px 48px; border-radius: 50px;
-  font-weight: 700; font-size: 18px; border: 2px solid #4ade80;
-  box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
-  animation: pulseGreen 2s infinite; transition: 0.3s;
-}
-.hero-cta-whatsapp:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 30px rgba(37, 211, 102, 0.8); }
-
-@keyframes pulseGreen {
-  0% { box-shadow: 0 0 10px rgba(37, 211, 102, 0.5); }
-  50% { box-shadow: 0 0 25px rgba(37, 211, 102, 0.8), 0 0 40px rgba(37, 211, 102, 0.4); }
-  100% { box-shadow: 0 0 10px rgba(37, 211, 102, 0.5); }
 }
 
 /* 3. BUTTONS PILL (TRANSPARENT GLASS) */
