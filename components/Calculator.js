@@ -4,21 +4,39 @@ import { useState } from 'react';
 const Calculator = () => {
   const [guests, setGuests] = useState(100);
 
-  // Logic: 1 Banda kitna use karega
+  // --- SETTINGS ---
+  const NAPKINS_IN_PACKET = 100; // Ek packet mein kitne tissues hote hain (Yahan change kar sakte ho)
+  
+  // --- CALCULATION LOGIC ---
   const items = {
-    plates: guests * 1,
-    cups: guests * 2,
-    spoons: guests * 1.5,
-    napkins: guests * 2,
-    glasses: guests * 1.5
+    plates: Math.ceil(guests * 1),           // 1 Plate per person
+    cups: Math.ceil(guests * 2),             // 2 Cups per person (Tea + Water)
+    spoons: Math.ceil(guests * 1.5),         // Thode extra spoons
+    glasses: Math.ceil(guests * 1.5),        // 1.5 Glasses
+    // Napkins calculation: Total Tissues / 100 = Packets
+    napkinPackets: Math.ceil((guests * 2) / NAPKINS_IN_PACKET) 
+  };
+
+  // --- WHATSAPP SEND FUNCTION ---
+  const sendToWhatsApp = () => {
+    const message = `Hello, I checked the Party Planner on your website.%0A%0A` +
+                    `For *${guests} Guests*, here is the estimate:%0A` +
+                    `🍽️ Plates: ${items.plates} pcs%0A` +
+                    `☕ Cups: ${items.cups} pcs%0A` +
+                    `🥄 Spoons: ${items.spoons} pcs%0A` +
+                    `🧻 Napkins: ${items.napkinPackets} Packets%0A%0A` +
+                    `I want to order this. Please confirm price.`;
+
+    // Apna number yahan check kar lein
+    window.open(`https://wa.me/919814812623?text=${message}`, '_blank');
   };
 
   return (
     <div style={styles.wrapper}>
       <h2 style={styles.heading}>🎉 Party Material Planner</h2>
-      <p style={styles.subtext}>Enter number of guests to estimate estimate requirements.</p>
+      <p style={styles.subtext}>Enter guests to calculate material & send order.</p>
 
-      {/* Slider */}
+      {/* Slider Section */}
       <div style={styles.inputContainer}>
         <label style={styles.label}>Guests: <strong>{guests}</strong></label>
         <input 
@@ -29,13 +47,44 @@ const Calculator = () => {
         />
       </div>
 
-      {/* Result Cards */}
+      {/* Results Grid */}
       <div style={styles.grid}>
-        <div style={styles.card}><div style={styles.icon}>🍽️</div><div style={styles.count}>{Math.ceil(items.plates)}</div><div style={styles.name}>Plates</div></div>
-        <div style={styles.card}><div style={styles.icon}>☕</div><div style={styles.count}>{Math.ceil(items.cups)}</div><div style={styles.name}>Cups</div></div>
-        <div style={styles.card}><div style={styles.icon}>🥄</div><div style={styles.count}>{Math.ceil(items.spoons)}</div><div style={styles.name}>Spoons</div></div>
-        <div style={styles.card}><div style={styles.icon}>🧻</div><div style={styles.count}>{Math.ceil(items.napkins)}</div><div style={styles.name}>Napkins</div></div>
+        {/* Plates */}
+        <div style={styles.card}>
+            <div style={styles.icon}>🍽️</div>
+            <div style={styles.count}>{items.plates}</div>
+            <div style={styles.name}>Plates</div>
+        </div>
+        
+        {/* Cups */}
+        <div style={styles.card}>
+            <div style={styles.icon}>☕</div>
+            <div style={styles.count}>{items.cups}</div>
+            <div style={styles.name}>Cups</div>
+        </div>
+        
+        {/* Spoons */}
+        <div style={styles.card}>
+            <div style={styles.icon}>🥄</div>
+            <div style={styles.count}>{items.spoons}</div>
+            <div style={styles.name}>Spoons</div>
+        </div>
+        
+        {/* Napkins (Packets) */}
+        <div style={styles.card}>
+            <div style={styles.icon}>🧻</div>
+            <div style={styles.count}>{items.napkinPackets}</div>
+            <div style={styles.name}>Packets <span style={{fontSize:'10px', color:'#999'}}>(Napkins)</span></div>
+        </div>
       </div>
+
+      {/* WHATSAPP BUTTON */}
+      <button onClick={sendToWhatsApp} style={styles.waButton}>
+        <i className="fab fa-whatsapp" style={{marginRight: '8px', fontSize: '18px'}}></i>
+        Send Estimate on WhatsApp
+      </button>
+
+      <p style={styles.note}>*1 Napkin Packet = {NAPKINS_IN_PACKET} pcs approx.</p>
     </div>
   );
 };
@@ -52,10 +101,31 @@ const styles = {
   inputContainer: { marginBottom: '25px' },
   label: { display: 'block', marginBottom: '10px', fontSize: '16px', color: '#333' },
   slider: { width: '100%', accentColor: '#ff6600', cursor: 'pointer' },
-  grid: { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '15px' },
+  grid: { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '15px', marginBottom: '25px' },
   card: { background: '#fff', padding: '15px', borderRadius: '12px', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' },
   count: { fontSize: '20px', fontWeight: 'bold', color: '#ff6600' },
-  name: { fontSize: '13px', color: '#555' }
+  name: { fontSize: '13px', color: '#555' },
+  icon: { fontSize: '24px', marginBottom: '5px' },
+  
+  // New Button Style
+  waButton: {
+    background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
+    color: 'white',
+    border: 'none',
+    padding: '12px 25px',
+    borderRadius: '50px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    boxShadow: '0 5px 15px rgba(37, 211, 102, 0.4)',
+    transition: 'transform 0.2s',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    marginTop: '10px'
+  },
+  note: { fontSize: '11px', color: '#999', marginTop: '15px', fontStyle: 'italic' }
 };
 
 export default Calculator;
