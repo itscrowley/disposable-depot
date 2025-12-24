@@ -55,12 +55,12 @@ header {
   
   /* --- PILL SHAPE MAGIC --- */
   border-radius: 50px;     /* Pill shape */
-  padding: 15px 15px;       /* Ye wo padding hai jo background ko content se door karegi */
+  padding: 10px 10px;       /* Ye wo padding hai jo background ko content se door karegi */
   
   /* --- GLASS EFFECT (Original) --- */
   background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(15px) saturate(180%);
-  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  backdrop-filter: blur(15px) saturate(200%);
+  -webkit-backdrop-filter: blur(15px) saturate(200%);
   
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -77,8 +77,8 @@ body.dark-mode header {
 header.scrolled {
   top: 10px;
   /* Scroll pe thoda compact kar sakte hain */
-  padding: 15px 15px; 
-  backdrop-filter: blur(20px) saturate(200%);
+  padding: 10px 10px; 
+  backdrop-filter: blur(10px) saturate(200%);
 }
 
 /* --- INNER CONTENT (Ye waisa hi hai jaisa aapka original tha) --- */
