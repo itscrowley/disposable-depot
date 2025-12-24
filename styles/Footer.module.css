@@ -1,6 +1,6 @@
 /* styles/Footer.module.css */
 
-/* --- 1. BASE STYLES & LAYOUT (Common for both) --- */
+/* --- 1. COMMON SETTINGS --- */
 .container {
     max-width: 1170px;
     margin: auto;
@@ -19,172 +19,141 @@
     margin-bottom: 30px;
 }
 
+/* Logo - Orange Hamesha */
 .footerLogo {
     font-size: 24px;
-    color: #ff6600; /* Orange Logo (Always same) */
+    color: #ff6600 !important;
     margin-bottom: 20px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+    text-shadow: 0 2px 10px rgba(255, 102, 0, 0.2); /* Halka glow */
 }
 
+/* Headings */
 .footerCol h3 {
     font-size: 18px;
-    text-transform: capitalize;
     margin-bottom: 35px;
-    font-weight: 500;
+    font-weight: 600;
     position: relative;
+    text-transform: capitalize;
 }
 
+/* Orange Line under Heading */
 .footerCol h3::before {
     content: '';
     position: absolute;
     left: 0;
     bottom: -10px;
-    background-color: #ff6600; /* Orange Line */
-    height: 2px;
+    background-color: #ff6600;
+    height: 3px;
     width: 50px;
+    border-radius: 2px;
 }
 
-.text {
-    font-size: 15px;
-    margin-bottom: 20px;
-}
-
-.footerCol ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footerCol ul li {
-    margin-bottom: 10px;
-}
+/* Links & Text List */
+.footerCol ul { list-style: none; padding: 0; }
+.footerCol ul li { margin-bottom: 12px; }
 
 .link {
     font-size: 16px;
-    text-transform: capitalize;
     text-decoration: none;
-    font-weight: 300;
+    transition: 0.3s;
     display: block;
-    transition: all 0.3s ease;
+    font-weight: 400;
 }
 
 .link:hover {
-    color: #ff6600 !important; /* Force Orange hover */
-    padding-left: 8px;
+    color: #ff6600 !important;
+    padding-left: 8px; /* Move effect */
+    text-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
 }
 
-.contactInfo li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
+.contactInfo li { display: flex; align-items: center; margin-bottom: 15px; }
+.icon { font-size: 18px; color: #ff6600; margin-right: 15px; width: 25px; text-align: center; }
 
-.icon {
-    font-size: 18px;
-    color: #ff6600;
-    margin-right: 15px;
-    width: 25px;
-    text-align: center;
-}
-
-.socialLinks {
-    display: flex;
-    gap: 10px;
-}
-
+/* Social Icons */
+.socialLinks { display: flex; gap: 12px; }
 .socialIcon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    text-decoration: none;
-    transition: all 0.3s ease;
+    display: flex; justify-content: center; align-items: center;
+    height: 40px; width: 40px; border-radius: 50%;
+    text-decoration: none; transition: 0.3s;
+    backdrop-filter: blur(5px); /* Icon ke andar bhi glass */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .socialIcon:hover {
     background-color: #ff6600 !important;
     color: #fff !important;
+    transform: translateY(-3px);
 }
 
 .footerBottom {
-    padding: 15px;
+    padding: 20px;
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* --- 2. LIGHT MODE (DEFAULT) - Ye Ab Pehle Chalega --- */
+
+/* =========================================
+   2. GLASSMORPHISM - LIGHT MODE (Default)
+   ========================================= */
 .footer {
-    background-color: #f8f9fa; /* Light Grey Background */
-    color: #333333; /* Dark Text */
+    /* Frosted Glass Effect */
+    background: rgba(255, 255, 255, 0.75) !important; /* Safed Translucent */
+    backdrop-filter: blur(16px);                      /* Blur Effect */
+    -webkit-backdrop-filter: blur(16px);              /* Safari ke liye */
+    border-top: 1px solid rgba(255, 255, 255, 0.8);   /* Shiny Border */
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);     /* Shadow */
+    
+    color: #333333 !important;
     padding: 70px 0 0;
     font-family: sans-serif;
     line-height: 1.5;
 }
 
-.footerCol h3 {
-    color: #222222; /* Black Heading */
+/* Light Mode Colors */
+.footerCol h3 { color: #222 !important; }
+.text, .link, .contactInfo li { color: #555 !important; }
+.socialIcon { 
+    background-color: rgba(255, 255, 255, 0.9) !important; 
+    color: #333 !important; 
+    border: 1px solid rgba(0,0,0,0.05);
 }
-
-.text, .link, .contactInfo li {
-    color: #555555; /* Dark Grey Content */
-}
-
-.socialIcon {
-    background-color: #e0e0e0; /* Grey Circle */
-    color: #333333;
-}
-
-.footerBottom {
-    background-color: #e9ecef; /* Footer Bottom Light */
-    color: #666;
-}
+.footerBottom { color: #666 !important; border-color: rgba(0,0,0,0.1) !important; }
 
 
-/* --- 3. DARK MODE (OVERRIDE) - Sirf tab jab Dark Mode ON ho --- */
+/* =========================================
+   3. GLASSMORPHISM - DARK MODE
+   ========================================= */
 @media (prefers-color-scheme: dark) {
     .footer {
-        background-color: #1a1a1a; /* Dark Grey Bg */
-        color: #ffffff;
+        /* Dark Frosted Glass */
+        background: rgba(30, 30, 30, 0.7) !important; /* Kala Translucent */
+        border-top: 1px solid rgba(255, 255, 255, 0.15); /* White Shiny Border */
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+        color: #ffffff !important;
     }
 
-    .footerCol h3 {
-        color: #ffffff;
+    .footerCol h3 { color: #ffffff !important; }
+    .text, .link, .contactInfo li { color: #cccccc !important; }
+    
+    .socialIcon { 
+        background-color: rgba(255, 255, 255, 0.1) !important; 
+        color: #fff !important; 
+        border: 1px solid rgba(255,255,255,0.1);
     }
-
-    .text, .link, .contactInfo li {
-        color: #bbbbbb; /* Light Grey Content */
-    }
-
-    .socialIcon {
-        background-color: rgba(255, 255, 255, 0.1);
-        color: #ffffff;
-    }
-
-    .footerBottom {
-        background-color: #111111;
-        color: #888;
-    }
+    
+    .footerBottom { color: #999 !important; border-color: rgba(255,255,255,0.1) !important; }
 }
 
 
-/* --- MOBILE FIX --- */
+/* --- Mobile Responsive --- */
 @media (max-width: 768px) {
-    .footerCol {
-        width: 100%;
-        text-align: center;
-    }
-    .footerCol h3::before {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .contactInfo li {
-        justify-content: center;
-    }
-    .socialLinks {
-        justify-content: center;
-    }
+    .footerCol { width: 100%; text-align: center; }
+    .footerCol h3::before { left: 50%; transform: translateX(-50%); }
+    .contactInfo li { justify-content: center; }
+    .socialLinks { justify-content: center; }
 }
