@@ -1,76 +1,189 @@
+/* styles/Footer.module.css */
+
+/* --- DEFAULT: DARK MODE (Raat wala look) --- */
 .footer {
-    background-color: #1a1a1a;
+    background-color: #1a1a1a; /* Dark Grey Bg */
     padding: 70px 0 0;
-    color: #ffffff;
+    color: #ffffff; /* White Text */
     font-family: sans-serif;
     line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 .container {
     max-width: 1170px;
     margin: auto;
     padding: 0 15px;
 }
+
 .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
 .footerCol {
     width: 30%;
     padding: 0 15px;
     margin-bottom: 30px;
 }
+
 .footerLogo {
     font-size: 24px;
-    color: #ff6600;
+    color: #ff6600; /* Orange Logo (Same in both modes) */
     margin-bottom: 20px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
 .footerCol h3 {
     font-size: 18px;
-    color: #ffffff;
+    color: #ffffff; /* Headings White in Dark Mode */
     text-transform: capitalize;
     margin-bottom: 35px;
     font-weight: 500;
     position: relative;
 }
+
 .footerCol h3::before {
     content: '';
     position: absolute;
     left: 0;
     bottom: -10px;
-    background-color: #ff6600;
+    background-color: #ff6600; /* Orange Line */
     height: 2px;
     width: 50px;
 }
-.text { color: #bbbbbb; font-size: 15px; margin-bottom: 20px; }
-.footerCol ul { list-style: none; padding: 0; }
-.footerCol ul li { margin-bottom: 10px; }
+
+.text {
+    color: #bbbbbb; /* Halka Grey Text */
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.footerCol ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footerCol ul li {
+    margin-bottom: 10px;
+}
+
 .link {
-    font-size: 16px; text-transform: capitalize; color: #bbbbbb;
-    text-decoration: none; font-weight: 300; display: block;
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #bbbbbb;
+    text-decoration: none;
+    font-weight: 300;
+    display: block;
     transition: all 0.3s ease;
 }
-.link:hover { color: #ff6600; padding-left: 8px; }
-.contactInfo li { display: flex; align-items: center; margin-bottom: 15px; color: #bbbbbb; }
-.icon { font-size: 18px; color: #ff6600; margin-right: 15px; width: 25px; text-align: center; }
-.socialLinks { display: flex; gap: 10px; }
+
+.link:hover {
+    color: #ff6600;
+    padding-left: 8px;
+}
+
+.contactInfo li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #bbbbbb;
+}
+
+.icon {
+    font-size: 18px;
+    color: #ff6600;
+    margin-right: 15px;
+    width: 25px;
+    text-align: center;
+}
+
+.socialLinks {
+    display: flex;
+    gap: 10px;
+}
+
 .socialIcon {
-    display: flex; justify-content: center; align-items: center;
-    height: 40px; width: 40px; background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50%; color: #ffffff; text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.1); /* White transparent circle */
+    border-radius: 50%;
+    color: #ffffff;
+    text-decoration: none;
     transition: all 0.3s ease;
 }
-.socialIcon:hover { color: #1a1a1a; background-color: #ff6600; }
-.footerBottom {
-    background-color: #111111; padding: 15px; text-align: center;
-    margin-top: 20px; font-size: 14px; color: #888;
+
+.socialIcon:hover {
+    color: #1a1a1a;
+    background-color: #ff6600;
 }
+
+.footerBottom {
+    background-color: #111111; /* Darker bottom bar */
+    padding: 15px;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #888;
+}
+
+/* --- LIGHT MODE ADJUSTMENTS (Din wala look) --- */
+/* Ye code tab chalega jab user ka system 'Light Mode' me hoga */
+@media (prefers-color-scheme: light) {
+    .footer {
+        background-color: #f4f4f4; /* Light Grey Bg */
+        color: #333333; /* Dark Text */
+    }
+
+    .footerCol h3 {
+        color: #222222; /* Black Headings */
+    }
+
+    .text, .link, .contactInfo li {
+        color: #555555; /* Dark Grey Content Text */
+    }
+    
+    .link:hover {
+        color: #ff6600; /* Hover still Orange */
+    }
+
+    /* Social Icons adjustment for Light Mode */
+    .socialIcon {
+        background-color: rgba(0, 0, 0, 0.1); /* Black transparent circle */
+        color: #333333;
+    }
+    
+    .socialIcon:hover {
+        background-color: #ff6600;
+        color: #fff;
+    }
+
+    .footerBottom {
+        background-color: #e0e0e0; /* Slightly darker grey for bottom */
+        color: #666;
+    }
+}
+
+/* --- MOBILE RESPONSIVE --- */
 @media (max-width: 768px) {
-    .footerCol { width: 100%; text-align: center; }
-    .footerCol h3::before { left: 50%; transform: translateX(-50%); }
-    .contactInfo li { justify-content: center; }
-    .socialLinks { justify-content: center; }
+    .footerCol {
+        width: 100%;
+        text-align: center;
+    }
+    .footerCol h3::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .contactInfo li {
+        justify-content: center;
+    }
+    .socialLinks {
+        justify-content: center;
+    }
 }
