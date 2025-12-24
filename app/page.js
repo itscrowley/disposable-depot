@@ -178,6 +178,10 @@ ${notes ? `"${notes}"` : "None"}
               <span>⚡ Limited Time Offer &nbsp;•&nbsp; </span>
               <span>🔥 Special Offer: Bulk Discounts Available! &nbsp;•&nbsp; </span>
               <span>⚡ Limited Time Offer &nbsp;•&nbsp; </span>
+    <span>🔥 Special Offer: Bulk Discounts Available! &nbsp;•&nbsp; </span>
+              <span>⚡ Limited Time Offer &nbsp;•&nbsp; </span>
+    <span>🔥 Special Offer: Bulk Discounts Available! &nbsp;•&nbsp; </span>
+              <span>⚡ Limited Time Offer &nbsp;•&nbsp; </span>
             </div>
           </div>
         </section>
