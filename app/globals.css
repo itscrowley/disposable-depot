@@ -283,84 +283,65 @@ body.dark-mode .marquee-track span { color: #fff; text-shadow: 0 1px 3px rgba(0,
 
 /* --- WHY US WRAPPER --- */
 .why-us-wrapper {
-  position: relative; 
+  position: relative;
   width: 100%;
-  border-top: 1px solid rgba(0,0,0,0.1); 
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 0; /* Padding child elements sambhal lenge */
   margin-bottom: 60px;
   
-  /* 1. Overflow Hidden zaroori hai taaki blurred edges bahar na dikhein */
-  overflow: hidden;
+  /* 1. Stacking Context Create karein */
+  z-index: 1; 
+  /* 2. Blur edges ko katne ke liye */
+  overflow: hidden; 
   
-  /* Note: Yahan se background-image hata di gayi hai */
+  border-top: 1px solid rgba(0,0,0,0.1); 
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-/* --- PARALLAX & BLUR IMAGE (New Code) --- */
+/* --- PARALLAX BACKGROUND LAYER --- */
 .why-us-wrapper::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   
-  /* Image yahan lagayi hai */
+  /* 3. Negative Positioning (Transform ki jagah) */
+  /* Image ko container se thoda bada karte hain taaki blur edges na dikhein */
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+
+  /* 4. Image Setup */
   background-image: url("https://plus.unsplash.com/premium_photo-1681426736883-49a5787eee8e?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   
-  /* 2. Parallax Effect */
+  /* 5. PARALLAX MAGIC PROPERTY */
   background-attachment: fixed; 
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 
-  /* 3. Image Blur Effect */
-  filter: blur(8px); /* Jitna dhundla chahiye value badha dein */
+  /* 6. Blur Effect */
+  filter: blur(8px);
   
-  /* 4. Scale fix: Blur karne par kinare white ho jate hain, isliye thoda zoom kiya */
-  transform: scale(1.1); 
-  
-  z-index: 0; /* Content ke peeche */
+  /* 7. Layering: Content ke peeche bhejein */
+  z-index: -1; 
 }
 
 /* --- GLASS OVERLAY --- */
 .why-us-glass {
-  position: relative; /* Z-index kaam karne ke liye zaroori */
-  z-index: 1; /* Image ke upar */
-  
-  background: rgba(255, 255, 255, 0.6); /* Thoda transparency adjust kiya */
-  
-  /* Agar aapko image pehle se blurred hai, to yahan backdrop-filter kam kar sakte hain */
-  backdrop-filter: blur(20px); 
-  -webkit-backdrop-filter: blur(10px);
-  
-  padding: 50px 0; 
-  width: 100%; 
+  position: relative;
+  width: 100%;
   height: 100%;
+  padding: 60px 0; /* Padding yahan di hai */
+  
+  /* Background thoda saaf rakhein taaki peeche ki image dikhe */
+  background: rgba(255, 255, 255, 0.5); 
+  backdrop-filter: blur(5px); /* Double blur for smoothness */
+  z-index: 2;
 }
 
 /* --- DARK MODE --- */
 body.dark-mode .why-us-glass { 
   background: rgba(15, 23, 42, 0.85); 
 }
-
-/* --- CARDS (No Changes needed usually, but safe keep) --- */
-.swipe-container {
-  display: flex; justify-content: center; gap: 20px;
-  padding: 0 20px; max-width: 1200px; margin: 0 auto;
-  flex-wrap: wrap;
-}
-.swipe-card {
-  background: var(--card-bg); 
-  border: 1px solid var(--glass-border-strong);
-  padding: 25px; border-radius: 20px; min-width: 220px; flex: 1;
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  box-shadow: 0 5px 15px var(--shadow-color); transition: all 0.3s;
-  position: relative; overflow: hidden;
-}
-.swipe-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(249, 115, 22, 0.2); }
-.swipe-icon { font-size: 40px; margin-bottom: 15px; }
-.swipe-text h4 { font-size: 18px; margin: 0 0 5px; color: var(--primary); font-weight: 800; }
-.swipe-text p { font-size: 13px; margin: 0; color: var(--text-muted); }
 
 /* MID BANNER & BULK BUTTON */
 .mid-banner {
