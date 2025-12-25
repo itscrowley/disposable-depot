@@ -373,9 +373,9 @@ ${notes ? `"${notes}"` : "None"}
   {/* 👇👇 CLEAR IMAGE PARALLAX SECTION 👇👇 */}
       <section style={{
           position: 'relative',
-          padding: '100px 0',
-          marginTop: '50px',
-          marginBottom: '50px',
+          padding: '50px 0', /* 👈 100px se 50px kar diya (Height kam ho gayi) */
+          marginTop: '40px', /* Thoda margin bhi kam kiya taaki gap kam ho */
+          marginBottom: '40px',
           
           /* Background Image */
           backgroundImage: `url('https://images.unsplash.com/photo-1761481755390-83999d790b95?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
