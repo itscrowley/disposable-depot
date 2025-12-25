@@ -13,33 +13,37 @@
   margin: 0 auto;
 }
 
-/* --- CARD STYLING (Light Mode - Default) --- */
+/* ================= CARD STYLING (DEFAULT / LIGHT MODE) ================= */
 .card {
-  background: rgba(255, 255, 255, 0.9); /* Thoda solid white taaki text clear dikhe */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  /* Step 1: Force Solid White Background */
+  background-color: #ffffff !important; 
   
-  /* Orange Tint Border */
-  border: 1px solid rgba(249, 115, 22, 0.2); 
+  /* Step 2: Orange Border */
+  border: 2px solid #f97316 !important; 
+  
+  /* Step 3: Round Corners & Shadow */
   border-radius: 20px;
   padding: 30px 20px;
   text-align: center;
   min-width: 200px;
   flex: 1;
-  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.1); /* Halka Orange Shadow */
-  transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  
+  /* Ensure text is visible */
+  color: #1f2937 !important;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  border-color: rgba(249, 115, 22, 0.6); /* Hover par border dark orange */
-  box-shadow: 0 15px 40px rgba(249, 115, 22, 0.2);
+  box-shadow: 0 15px 40px rgba(249, 115, 22, 0.2) !important;
 }
 
 .icon {
   font-size: 3rem;
   margin-bottom: 10px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  /* Icon ko thoda ubharne ke liye */
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
 }
 
 .number {
@@ -47,8 +51,8 @@
   font-weight: 800;
   margin: 0;
   
-  /* THEME COLOR: ORANGE */
-  color: #f97316; 
+  /* Orange Number */
+  color: #f97316 !important; 
   line-height: 1.2;
 }
 
@@ -58,23 +62,28 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 5px;
-  color: #4b5563; /* Grey Label */
+  
+  /* Dark Grey Text for Light Mode */
+  color: #374151 !important; 
 }
 
-/* --- DARK MODE OVERRIDES --- */
-/* Jab dark mode on hoga */
+/* ================= DARK MODE OVERRIDES ================= */
+/* Jab user Dark Mode switch karega, tab ye apply hoga */
 
 :global(body.dark-mode) .card {
-  background: rgba(15, 23, 42, 0.85); /* Dark Background */
-  border: 1px solid rgba(249, 115, 22, 0.3); /* Orange Border */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  /* Dark Grey Background */
+  background-color: #111827 !important; 
+  
+  /* Border thoda light */
+  border: 2px solid rgba(249, 115, 22, 0.4) !important; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
 }
 
 :global(body.dark-mode) .number {
-  color: #f97316; /* Orange Text */
-  text-shadow: 0 0 20px rgba(249, 115, 22, 0.5); /* Orange Glow Effect */
+  color: #f97316 !important; /* Orange text stays */
+  text-shadow: 0 0 15px rgba(249, 115, 22, 0.6) !important; /* Glow Effect */
 }
 
 :global(body.dark-mode) .label {
-  color: #d1d5db; /* Light Grey Label */
+  color: #e5e7eb !important; /* Light Text for Dark Mode */
 }
