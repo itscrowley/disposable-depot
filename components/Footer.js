@@ -81,20 +81,19 @@ const Footer = () => {
               </li>
             </ul>
 
-            {/* 👇👇 GOOGLE MAP ADDED BELOW 👇👇 */}
-            <div style={{ marginTop: '15px', borderRadius: '10px', overflow: 'hidden' }}>
-              <iframe 
-                src="https://maps.app.goo.gl/c1pwQFSossAh3pgj6?g_st=ac" 
-                width="100%" 
-                height="150" 
-                style={{ border: 0 }} 
-                allowFullScreen="" 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Google Map Location"
-              ></iframe>
-            </div>
-            {/* 👆👆 MAP ENDS HERE 👆👆 */}
+            {/* 👇👇 Sahi Location Wala Map 👇👇 */}
+<div style={{ marginTop: '20px', borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.2)' }}>
+  <iframe 
+    width="100%" 
+    height="150" 
+    frameBorder="0" 
+    scrolling="no" 
+    marginHeight="0" 
+    marginWidth="0" 
+    src="https://maps.google.com/maps?width=100%25&amp;height=150&amp;hl=en&amp;q=The%20Disposable%20Depot%2C%20Jalandhar%20-%20Kala%20Sanghian%20Rd%2C%20Kot%20Sadiq%2C%20Jalandhar%2C%20Punjab&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+  </iframe>
+</div>
+{/* 👆👆 Sahi Location Wala Map 👆👆 */}
 
           </div>
 
