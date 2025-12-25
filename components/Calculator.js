@@ -56,11 +56,11 @@ const Calculator = () => {
             <div style={styles.name}>Plates</div>
         </div>
         
-        {/* Cups */}
+        {/* Glasses */}
         <div style={styles.card}>
-            <div style={styles.icon}>☕</div>
-            <div style={styles.count}>{items.cups}</div>
-            <div style={styles.name}>Cups</div>
+            <div style={styles.icon}>🥤</div>
+            <div style={styles.count}>{items.glasses}</div>
+            <div style={styles.name}>Glasses</div>
         </div>
         
         {/* Spoons */}
