@@ -16,43 +16,40 @@ const Footer = () => {
             </p>
             <div className={styles.socialLinks}>
     
-    {/* 1. Facebook Link */}
-    {/* "YOUR_PAGE_NAME" ki jagah apni Facebook profile/page ka naam likhein */}
-    <a 
-        href="https://www.facebook.com/TheDisposableDepot" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className={styles.socialIcon}
-        aria-label="Facebook"
-    >
-        <i className="fab fa-facebook-f"></i>
-    </a>
+             {/* 1. Facebook Link */}
+             <a 
+                href="https://www.facebook.com/TheDisposableDepot" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={styles.socialIcon}
+                aria-label="Facebook"
+             >
+                <i className="fab fa-facebook-f"></i>
+             </a>
 
-    {/* 2. Instagram Link */}
-    {/* "YOUR_USERNAME" ki jagah apni Instagram ID likhein */}
-    <a 
-        href="https://www.instagram.com/the_disposable_depot/" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className={styles.socialIcon}
-        aria-label="Instagram"
-    >
-        <i className="fab fa-instagram"></i>
-    </a>
+             {/* 2. Instagram Link */}
+             <a 
+                href="https://www.instagram.com/the_disposable_depot/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={styles.socialIcon}
+                aria-label="Instagram"
+             >
+                <i className="fab fa-instagram"></i>
+             </a>
 
-    {/* 3. WhatsApp Link (Ye Sabse Important Hai) */}
-    {/* Maine aapka number add kar diya hai (91 + 9814812623) */}
-    <a 
-        href="https://wa.me/919814812623?text=Hello,%20I%20am%20interested%20in%20your%20products." 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className={styles.socialIcon}
-        aria-label="WhatsApp"
-    >
-        <i className="fab fa-whatsapp"></i>
-    </a>
+             {/* 3. WhatsApp Link */}
+             <a 
+                href="https://wa.me/919814812623?text=Hello,%20I%20am%20interested%20in%20your%20products." 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={styles.socialIcon}
+                aria-label="WhatsApp"
+             >
+                <i className="fab fa-whatsapp"></i>
+             </a>
 
-</div>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -66,7 +63,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact Info + MAP ADDED HERE */}
           <div className={styles.footerCol}>
             <h3>Contact Us</h3>
             <ul className={styles.contactInfo}>
@@ -83,6 +80,22 @@ const Footer = () => {
                 <span>thedisposabledepot@gmail.com</span>
               </li>
             </ul>
+
+            {/* 👇👇 GOOGLE MAP ADDED BELOW 👇👇 */}
+            <div style={{ marginTop: '15px', borderRadius: '10px', overflow: 'hidden' }}>
+              <iframe 
+                src="https://maps.app.goo.gl/c1pwQFSossAh3pgj6?g_st=ac" 
+                width="100%" 
+                height="150" 
+                style={{ border: 0 }} 
+                allowFullScreen="" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Map Location"
+              ></iframe>
+            </div>
+            {/* 👆👆 MAP ENDS HERE 👆👆 */}
+
           </div>
 
         </div>
