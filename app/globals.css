@@ -311,70 +311,67 @@ body.dark-mode .wa-form select, body.dark-mode .wa-form textarea { border-bottom
 body.dark-mode .msg-time { color: rgba(255,255,255,0.6); }
 .double-tick { font-size: 10px; color: #34B7F1; font-weight: bold; }
 
-/* ================= WHATSAPP FOOTER FORCE FIX ================= */
+/* ================= WHATSAPP FOOTER (CLEAN WHITE DESIGN) ================= */
 .wa-footer-bar { 
   margin: 0 !important; 
-  padding: 10px 15px !important; 
-  background: #f0f0f0 !important; 
-  display: flex !important; /* Zabardasti Flexbox lagayega */
-  flex-direction: row !important; /* Row mein rakhega */
+  padding: 5px 15px !important; 
+  background: #ffffff !important; /* White Background */
+  display: flex !important; 
   align-items: center !important; 
   justify-content: space-between !important;
-  gap: 10px !important; 
-  border-top: 1px solid rgba(0,0,0,0.1) !important; 
+  gap: 5px !important; 
+  border-top: 1px solid #f2f2f2 !important; /* Subtle border */
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  min-height: 60px !important; /* Height fix taaki button kate na */
+  min-height: 55px !important;
 }
 body.dark-mode .wa-footer-bar { background: #1f2c34 !important; border-top: 1px solid rgba(255,255,255,0.1) !important; }
 
-/* INPUT BOX FIX */
+/* INPUT BOX (Clean & Transparent) */
 .wa-footer-bar input { 
-  flex-grow: 1 !important; /* Jagah lega */
-  width: auto !important;
-  padding: 12px 15px !important; 
-  border-radius: 25px !important; 
+  flex-grow: 1 !important; 
+  padding: 10px 5px !important; 
   border: none !important; 
   outline: none !important; 
-  background: white !important; 
+  background: transparent !important; /* White ke upar transparent */
   font-size: 15px !important; 
-  height: 40px !important;
   color: #333 !important;
 }
-body.dark-mode .wa-footer-bar input { background: #2a3942 !important; color: white !important; }
+body.dark-mode .wa-footer-bar input { color: white !important; }
 
-/* SEND BUTTON FIX (ZABARDASTI VISIBLE KAREGA) */
+/* SEND BUTTON (Green Arrow + Smiley) */
 .btn-whatsapp-send { 
-  background-color: #075E54 !important; /* Dark Green */
-  color: white !important; 
+  background: transparent !important; /* No Green Circle */
   border: none !important; 
-  border-radius: 50% !important; 
-  width: 45px !important; 
-  height: 45px !important; 
-  min-width: 45px !important; /* Shrink hone se rokega */
-  min-height: 45px !important;
+  box-shadow: none !important; /* No Shadow */
+  width: auto !important; 
+  height: auto !important; 
+  min-width: auto !important;
+  padding: 0 5px !important;
   display: flex !important; 
   align-items: center !important; 
-  justify-content: center !important; 
+  gap: 12px !important; /* Space between Smiley and Arrow */
   cursor: pointer !important; 
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important; 
-  padding: 0 !important;
-  margin: 0 !important;
-  position: relative !important; /* Ensure visibility */
-  z-index: 10 !important;
 }
 
-/* ARROW ICON FORCE SHOW */
+/* 1. Smiley Icon (Grey) */
+.btn-whatsapp-send::before { 
+  content: '☺' !important; 
+  font-size: 26px !important; 
+  color: #9ca3af !important; /* Light Grey */
+  display: block !important;
+}
+
+/* 2. Arrow Icon (Dark Green) */
 .btn-whatsapp-send::after { 
   content: '➤' !important; 
-  font-size: 20px !important; 
-  color: white !important;
-  margin-left: 3px !important;
+  font-size: 24px !important; 
+  color: #075E54 !important; /* WhatsApp Green */
   display: block !important;
-  line-height: 1 !important;
 }
 
-.btn-whatsapp-send:hover { 
+/* Hover Effect */
+.btn-whatsapp-send:hover::after { 
   transform: scale(1.1); 
-  background-color: #128C7E !important; 
+  color: #128C7E !important; 
 }
