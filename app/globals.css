@@ -1,5 +1,10 @@
 @import "tailwindcss";
 @source "../components";
+/* Tailwind Reset Fix - Headings ko wapas Bold karne ke liye */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700; /* Ya 'bold' likh sakte ho */
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
 
 :root {
