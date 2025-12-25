@@ -370,36 +370,38 @@ ${notes ? `"${notes}"` : "None"}
           <a href="tel:+919814812623" className="btn-glow-gold">Call for Bulk Rates 📞</a>
         </div>
       </section>
-  {/* 👇👇 ISSE COPY KARKE YAHAN PASTE KAREIN 👇👇 */}
+  {/* 👇👇👇 NAYA CODE YAHAN PASTE KAREIN 👇👇👇 */}
+      
       <section style={{
           position: 'relative',
-          overflow: 'hidden',
           padding: '100px 0',
           marginTop: '50px',
           marginBottom: '50px',
+          backgroundImage: `url('https://images.unsplash.com/photo-1761481755390-83999d790b95?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
       }}>
-          {/* Background Layer (Blurred) */}
+          {/* Blur Overlay */}
           <div style={{
               position: 'absolute',
               top: 0,
               left: 0,
-              width: '110%',
-              height: '110%',
-              transform: 'translate(-5%, -5%)',
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop')`,
-              backgroundAttachment: 'fixed',
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              filter: 'blur(8px)', /* ✨ Blur Effect */
-              zIndex: '-1'
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'rgba(0, 0, 0, 0.6)', 
+              backdropFilter: 'blur(8px)',
+              zIndex: '0'
           }}></div>
 
-          {/* Content Layer (Sharp) */}
+          {/* Stats Content */}
           <div style={{ position: 'relative', zIndex: '1' }}>
                <Stats />
           </div>
       </section>
-      {/* 👆👆 YAHAN KHATAM 👆👆 */}
+
+      {/* 👆👆👆 YAHAN KHATAM 👆👆👆 */}
 
       <section className="section" id="order">
         <h2 className="section-title">Quick WhatsApp Order</h2>
