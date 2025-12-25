@@ -40,11 +40,11 @@ header {
   background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(15px) saturate(200%); -webkit-backdrop-filter: blur(15px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); transition: all 0.4s ease;
 }
-body.dark-mode header { background: rgba(15, 23, 42, 0.25); border: 1px solid rgba(255, 255, 255, 0.15); }
-header.scrolled { top: 10px; padding: 8px 8px; backdrop-filter: blur(10px) saturate(200%); }
+body.dark-mode header { background: rgba(15, 23, 42, 030px; border: 1px solid rgba(255, 255, 255, 0.15); }
+header.scrolled { top: 10px; padding: 5px 5px; backdrop-filter: blur(10px) saturate(200%); }
 
 .brand { display: flex; justify-content: center; align-items: center; width: 100%; }
-.logo-img { height: 30px; width: auto; max-width: 100%; object-fit: cover; display: block; border-radius: 50px; }
+.logo-img { height: 32px; width: auto; max-width: 100%; object-fit: cover; display: block; border-radius: 50px; }
 
 /* ================= HERO SECTION (FIXED FOR MOBILE) ================= */
 .parallax-wrapper { position: relative; width: 100%; overflow: hidden; }
