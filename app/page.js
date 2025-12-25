@@ -392,7 +392,7 @@ ${notes ? `"${notes}"` : "None"}
               left: 0,
               width: '100%',
               height: '100%',
-              backgroundColor: 'rgba(0, 0, 0, 0.1)', /* Sirf Kala Rang (No Blur) */
+              backgroundColor: 'rgba(0, 0, 0, 0)', /* Sirf Kala Rang (No Blur) */
               zIndex: '0'
           }}></div>
 
