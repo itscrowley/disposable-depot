@@ -9,8 +9,13 @@ const Footer = () => {
         <div className={styles.row}>
           
           {/* Brand Info */}
-          <div className={styles.footerCol}>
-            <h2 className={styles.footerLogo}>The Disposable Depot</h2>
+<div className={styles.footerCol}>
+  
+  {/* 👇👇 LOGO KO LINK MEIN WRAP KIYA 👇👇 */}
+  <Link href="/" style={{ textDecoration: 'none', cursor: 'pointer' }}>
+    <h2 className={styles.footerLogo}>The Disposable Depot</h2>
+  </Link>
+  {/* 👆👆 YAHAN KHATAM 👆👆 */}
             <p className={styles.text}>
               Best quality disposable items for all your business and event needs. Wholesale rates available.
             </p>
