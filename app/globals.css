@@ -91,7 +91,7 @@ header.scrolled {
 }
 
 .logo-img { 
-  height: 60px; 
+  height: 50px; /*  original 60px */
   width: auto; 
   max-width: 100%; 
   object-fit: cover; 
