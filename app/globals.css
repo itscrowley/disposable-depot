@@ -1,9 +1,4 @@
-/* --- SIRF YE 3 LINES NEW HAIN (Feature chalane ke liye) --- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
-@import "tailwindcss";
-@source "../components";
-
-/* --- ISKE NEECHE AAPKA PURANA ORIGINAL CODE HAI (NO CHANGES) --- */
 
 :root {
   --primary: #f97316;
@@ -44,57 +39,71 @@ body {
 a { text-decoration: none; transition: 0.3s ease; }
 button { cursor: pointer; border: none; outline: none; }
 
-/* --- HEADER CONTAINER --- */
+/* --- HEADER CONTAINER (Sirf isko Pill banaya hai) --- */
 header {
+  /* Positioning: Page ke center mein float karega */
   position: fixed;
   top: 20px; 
   left: 50%;
-  transform: translateX(-50%); 
+  transform: translateX(-50%); /* Exact Center karne ke liye */
   z-index: 1000;
-  width: fit-content;             
-  max-width: 90%;          
-  min-width: auto;        
-  border-radius: 50px;     
-  padding: 10px 10px;       
+
+  /* Sizing: Content ke hisaab se adjust hoga */
+  width: fit-content;             /* Full width hataya auto */
+  max-width: 90%;          /* Mobile par screen se bahar na jaye */
+  min-width: auto;        /* Bohot chhota na ho 300px */
+  
+  /* --- PILL SHAPE MAGIC --- */
+  border-radius: 50px;     /* Pill shape */
+  padding: 10px 10px;       /* Ye wo padding hai jo background ko content se door karegi */
+  
+  /* --- GLASS EFFECT (Original) --- */
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(15px) saturate(200%);
   -webkit-backdrop-filter: blur(15px) saturate(200%);
+  
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.4s ease;
 }
 
+/* --- DARK MODE --- */
 body.dark-mode header {
   background: rgba(15, 23, 42, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+/* --- SCROLLED STATE --- */
 header.scrolled {
   top: 10px;
+  /* Scroll pe thoda compact kar sakte hain */
   padding: 10px 10px; 
   backdrop-filter: blur(10px) saturate(200%);
 }
 
+/* --- INNER CONTENT (Ye waisa hi hai jaisa aapka original tha) --- */
 .brand { 
   display: flex; 
   justify-content: center; 
   align-items: center; 
   width: 100%; 
+  /* Height hatadi taaki padding apna kaam kare */
 }
 
 .logo-img { 
-  height: 60px; 
+  height: 60px; /*  original 60px */
   width: auto; 
-  max-width: 100%; 
+  max-width: 100%; /*  original 100px */
   object-fit: cover; 
   display: block; 
-  border-radius: 50px; 
+  border-radius: 50px; /* Aapka original style */
 }
 
-/* ================= HERO SECTION ================= */
+/* ================= HERO SECTION (FIXED PARALLAX + GLASS BOXES) ================= */
 
 .parallax-wrapper { position: relative; width: 100%; overflow: hidden; }
 
+/* 1. Main Hero Container (PARALLAX WAPAS AAYA) */
 .hero {
   width: 100%;
   min-height: 85vh;
@@ -106,13 +115,16 @@ header.scrolled {
   padding-top: 150px; 
   padding-bottom: 50px;
   position: relative;
+  
+  /* --- PARALLAX IMAGE SETTINGS --- */
   background-image: url("https://plus.unsplash.com/premium_photo-1747850753779-6d764d91935e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-  background-attachment: fixed;
+  background-attachment: fixed; /* FIXED = PARALLAX */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
+/* Overlay (Bahut halka) */
 .hero::after {
   content: ''; 
   position: absolute; 
@@ -121,6 +133,7 @@ header.scrolled {
   z-index: 1;
 }
 
+/* 2. TEXT BOX (STRONG GLASS, LESS WHITE) */
 .hero-content {
   position: relative; 
   z-index: 2;
@@ -130,9 +143,14 @@ header.scrolled {
   margin: 0 20px;
   border-radius: 40px;
   animation: fadeInUp 1s ease-out;
-  background: rgba(255, 255, 255, 0.1);
+  
+  /* --- GLASS EFFECT --- */
+  background: rgba(255, 255, 255, 0.1); /* Transparency Wapas */
+  
+  /* Blur 40px */
   backdrop-filter: blur(60px) saturate(200%);
   -webkit-backdrop-filter: blur(60px) saturate(200%);
+  
   border: 1px solid rgba(255, 255, 255, 0.3); 
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
@@ -163,16 +181,23 @@ body.dark-mode .hero-content h1 { text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
   100% { box-shadow: 0 0 10px rgba(37, 211, 102, 0.5); }
 }
 
+/* 3. BUTTONS PILL (TRANSPARENT GLASS) */
 .hero-actions-row {
   position: relative; 
   z-index: 5;
   display: flex; justify-content: center; align-items: center;
   gap: 20px; margin-top: 30px;
+  
+  /* Padding Original Wapas */
   padding: 12px 30px; 
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.25);
+
+  /* --- GLASS EFFECT --- */
+  background: rgba(255, 255, 255, 0.25); /* Halka safed */
+  
   backdrop-filter: blur(40px) saturate(180%);
   -webkit-backdrop-filter: blur(40px) saturate(180%);
+  
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
@@ -256,47 +281,71 @@ body.dark-mode .marquee-track span { color: #fff; text-shadow: 0 1px 3px rgba(0,
 .card-tag { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--secondary); background: rgba(22, 163, 74, 0.1); padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 8px; }
 .card.highlight { border: 2px solid var(--secondary); }
 
-/* WHY US SECTION */
+/* --- 1. MAIN WRAPPER (Parent) --- */
 .why-us-wrapper {
   position: relative;
   width: 100%;
   margin-bottom: 60px;
   border-top: 1px solid rgba(0,0,0,0.1); 
   border-bottom: 1px solid rgba(0,0,0,0.1);
+  
+  /* Z-Index 1 set karna zaroori hai taaki iska ::before body ke peeche na chupa jaye */
   z-index: 1; 
+  /* Blurred edges ko chupane ke liye */
   overflow: hidden; 
 }
 
+/* --- 2. BACKGROUND IMAGE LAYER (Parallax + Blur) --- */
+/* Ye content ka parent nahi, balki sibling ban kar peeche rahega */
 .why-us-wrapper::before {
   content: "";
   position: absolute;
+  /* Image ko thoda bada rakha hai taaki blur ke edges na dikhein */
   top: -10px; left: -10px; right: -10px; bottom: -10px;
+  
   background-image: url("https://plus.unsplash.com/premium_photo-1681426736883-49a5787eee8e?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  
+  /* Parallax Effect */
   background-attachment: fixed; 
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+
+  /* Sirf ye layer blur hogi */
   filter: blur(1px); 
+  
+  /* Content ke peeche bhejne ke liye */
   z-index: -1; 
 }
 
+/* --- 3. GLASS CONTAINER (Content Holder) --- */
 .why-us-glass {
+  /* Isko relative dena zaroori hai taaki ye ::before ke upar aaye */
   position: relative; 
-  z-index: 2; 
+  z-index: 2; /* Content sabse upar rahega */
+  
   width: 100%; 
   height: 100%;
   padding: 50px 0;
+  
+  /* Halka safed rang taaki text padha jaye */
   background: rgba(255, 255, 255, 0.6);
+  
+  /* Optional: Agar aap chahein to yahan bhi thoda frost effect rakh sakte hain, 
+     par content blur nahi hoga kyunki ye backdrop-filter hai */
   backdrop-filter: blur(5px); 
 }
 
+/* --- DARK MODE --- */
 body.dark-mode .why-us-glass { 
   background: rgba(15, 23, 42, 0.85); 
 }
 
+/* --- 4. CARDS & CONTENT (NO CHANGES - As requested) --- */
+/* Aapka purana code same rahega, bas ensure karein z-index theek ho */
 .swipe-container {
-  position: relative; 
-  z-index: 3; 
+  position: relative; /* Safety ke liye */
+  z-index: 3; /* Sabse top par */
   display: flex; justify-content: center; gap: 20px;
   padding: 0 20px; max-width: 1200px; margin: 0 auto;
   flex-wrap: wrap;
@@ -311,11 +360,11 @@ body.dark-mode .why-us-glass {
   position: relative; overflow: hidden;
 }
 
+/* ...Baki saara card CSS waisa hi rakhein... */
 .swipe-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(249, 115, 22, 0.2); }
 .swipe-icon { font-size: 40px; margin-bottom: 15px; }
 .swipe-text h4 { font-size: 18px; margin: 0 0 5px; color: var(--primary); font-weight: 800; }
 .swipe-text p { font-size: 13px; margin: 0; color: var(--text-muted); }
-
 /* MID BANNER & BULK BUTTON */
 .mid-banner {
   padding: 120px 20px;
@@ -446,4 +495,4 @@ body.dark-mode .wa-form select option { background-color: #1f2c34; color: white;
 .msg-time { font-size: 10px; color: rgba(0,0,0,0.45); }
 body.dark-mode .msg-time { color: rgba(255,255,255,0.6); }
 .double-tick { font-size: 10px; color: #34B7F1; font-weight: bold; }
-.wa-footer-bar { margin: 0; }
+.wa-footer-bar { margin-
