@@ -68,6 +68,11 @@ const Footer = () => {
               <li><Link href="/#catalogue" className={styles.link}>Our Products</Link></li>
               <li><Link href="/calculator" className={styles.link}>Party Planner (Calculator)</Link></li>
               <li><Link href="/faq" className={styles.link}>FAQs (Help)</Link></li>
+            <li className="mb-2">
+  <Link href="/planner" className="hover:text-blue-500 transition-colors">
+    Smart Menu Planner <span className="text-xs bg-green-500 text-white px-1.5 py-0.5 rounded ml-1">NEW</span>
+  </Link>
+</li>
             </ul>
           </div>
 
