@@ -370,20 +370,23 @@ ${notes ? `"${notes}"` : "None"}
           <a href="tel:+919814812623" className="btn-glow-gold">Call for Bulk Rates 📞</a>
         </div>
       </section>
-  {/* 👇👇 Sahi Code (Bracket Corrected) 👇👇 */}
-  <div style={{ marginTop: '80px', marginBottom: '80px' }}>
-    <Stats />
-    
-    {/* Optional: Divider Line */}
-    <hr style={{ 
-        border: '0', 
-        height: '1px', 
-        background: 'rgba(0,0,0,0.1)', 
-        maxWidth: '80%', 
-        margin: '60px auto 0' 
-    }} />
-  </div>
-  {/* 👆👆 Yahan Khatam 👆👆 */}
+  {/* 👇👇 YAHAN PASTE KAREIN (Purana <div> hata kar) 👇👇 */}
+      <section style={{
+          /* Warehouse Image with Dark Overlay */
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop')`,
+          backgroundAttachment: 'fixed', /* Parallax Magic */
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          padding: '100px 0',
+          marginTop: '50px',
+          marginBottom: '50px',
+          width: '100%',
+          position: 'relative'
+      }}>
+        <Stats />
+      </section>
+      {/* 👆👆 YAHAN KHATAM 👆👆 */}
       <section className="section" id="order">
         <h2 className="section-title">Quick WhatsApp Order</h2>
         
