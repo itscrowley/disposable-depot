@@ -370,9 +370,11 @@ ${notes ? `"${notes}"` : "None"}
           <a href="tel:+919814812623" className="btn-glow-gold">Call for Bulk Rates 📞</a>
         </div>
       </section>
-  div style={{ marginTop: '80px', marginBottom: '80px' }}>
-  <Stats />
-{/* Optional: Ek halki si line separation ke liye */}
+  {/* 👇👇 Sahi Code (Bracket Corrected) 👇👇 */}
+  <div style={{ marginTop: '80px', marginBottom: '80px' }}>
+    <Stats />
+    
+    {/* Optional: Divider Line */}
     <hr style={{ 
         border: '0', 
         height: '1px', 
@@ -381,7 +383,7 @@ ${notes ? `"${notes}"` : "None"}
         margin: '60px auto 0' 
     }} />
   </div>
-  {/* 👆👆 YAHAN KHATAM 👆👆 */}
+  {/* 👆👆 Yahan Khatam 👆👆 */}
       <section className="section" id="order">
         <h2 className="section-title">Quick WhatsApp Order</h2>
         
