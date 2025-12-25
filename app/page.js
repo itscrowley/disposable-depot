@@ -504,12 +504,26 @@ ${notes ? `"${notes}"` : "None"}
                 </div>
               </div>
 
+                            {/* --- REPLACE OLD WA-FOOTER-BAR WITH THIS --- */}
               <div className="wa-footer-bar">
-                <button type="submit" className="wa-send-btn">
-                  <span>Send Order on WhatsApp</span>
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+                {/* 1. Fake Input (Message text yahan dikhega) */}
+                <div className="wa-spoof-input">Send Order on WhatsApp</div>
+                
+                {/* 2. Send Button (Sirf Icons) */}
+                <button type="submit" className="btn-whatsapp-send">
+                  {/* Smiley Icon (Grey) */}
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="#9ca3af" className="wa-icon">
+                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                  </svg>
+                  
+                  {/* Send Arrow (Green) */}
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="#075E54" className="wa-icon">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                  </svg>
                 </button>
               </div>
+              {/* --- END REPLACE --- */}
+
 
             </form>
           </div>
