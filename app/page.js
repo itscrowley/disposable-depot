@@ -1,8 +1,6 @@
-import Stats from '../components/Stats';
 "use client"; // Ye line bahut zaroori hai interactivity ke liye
-
 import { useState, useEffect } from "react";
-
+import Stats from '../components/Stats';
 // --- IMAGE DATA (Aapki original script se) ---
 const galleries = {
   waterGlass: ["https://thedisposabledepot.wordpress.com/wp-content/uploads/2025/02/1000061753.jpg", "https://thedisposabledepot.wordpress.com/wp-content/uploads/2025/02/drinking-water-glass-3038849766770950486076.jpg", "https://thedisposabledepot.wordpress.com/wp-content/uploads/2025/02/1000061901.jpg"],
