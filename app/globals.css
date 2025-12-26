@@ -357,3 +357,30 @@ body.dark-mode .wa-spoof-input { color: white !important; }
   transform: scale(1.1); 
   fill: #128C7E !important; 
 }
+/* =======================================================
+   DESKTOP FIX: HEADER IMAGE & PILL SIZE INCREASE
+   (Hero section same rahega, bas header bada hoga)
+   ======================================================= */
+
+@media (min-width: 1024px) {
+
+  /* 1. Header Pill (Container) Bada Karein */
+  header {
+    /* Padding badhayein taaki pill khuli aur badi lage */
+    padding: 15px 50px !important; 
+    
+    /* Shape ko perfect round capsule banayein */
+    border-radius: 100px !important;
+    
+    /* Thoda neeche shift karein taaki 'latakta hua' feel aaye */
+    top: 30px !important; 
+  }
+
+  /* 2. Logo Image (Image) Bada Karein */
+  .logo-img {
+    height: 90px !important;  /* 👈 YAHAN CONTROL KAREIN (Pehle 30px tha, ab 90px) */
+    width: auto !important;
+    max-width: none !important; /* Rok-tok hatayi */
+  }
+
+}
