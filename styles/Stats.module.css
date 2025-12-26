@@ -1,88 +1,119 @@
-/* Container Layout */
-.statsSection {
-  padding: 20px 10px;
+/* --- Stats Section Container --- */
+.section {
+  position: relative; /* Zaroori hai overlay ke liye */
+  padding: 60px 20px;
+  
+  /* Background Image Setting */
+  background-image: url("https://plus.unsplash.com/premium_photo-1681426736883-49a5787eee8e?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Parallax Effect */
+  text-align: center;
+  overflow: hidden;
+  
+  /* Margin fix */
+  margin: 0 !important;
   width: 100%;
 }
 
+/* --- OVERLAY (The Magic Layer) --- */
+/* Ye layer background image ke upar aati hai */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* Top, Bottom, Left, Right = 0 (Full Cover) */
+  z-index: 1;
+  transition: background 0.3s ease;
+  backdrop-filter: blur(5px); /* Blur effect */
+  
+  /* 👇 LIGHT MODE: White tint */
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* 👇 DARK MODE OVERLAY FIX */
+/* Dark mode mein White layer ko hatakar DARK layer laga di */
+:global(body.dark-mode) .section::before {
+  background: rgba(0, 0, 0, 0.9); /* 80% Black Opacity (Image ko dark karega) */
+}
+
+/* Content Wrapper */
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  position: relative;
+  z-index: 2; /* Overlay ke upar content */
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* ================= CARD STYLING (DEFAULT / LIGHT MODE) ================= */
+/* --- GRID LAYOUT --- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  padding: 10px;
+}
+
+/* --- CARD DESIGN (Base) --- */
 .card {
-  /* Step 1: Force Solid White Background */
-  background-color: #ffffff !important; 
-  
-  /* Step 2: Orange Border */
-  border: 2px solid #f97316 !important; 
-  
-  /* Step 3: Round Corners & Shadow */
+  padding: 20px 25px;
   border-radius: 20px;
-  padding: 30px 20px;
   text-align: center;
-  min-width: 200px;
-  flex: 1;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
-  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: default;
   
-  /* Ensure text is visible */
-  color: #1f2937 !important;
+  /* Light Mode Colors */
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05); /* Very subtle default shadow */
 }
 
+/* --- CARD DESIGN (Dark Mode) --- */
+:global(body.dark-mode) .card {
+  background: #1e293b; /* Dark Grey/Blue */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* --- HOVER EFFECT (Common for BOTH Modes) --- */
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(249, 115, 22, 0.2) !important;
+  transform: translateY(-10px);
+  
+  /* 👇 FORCE ORANGE SHADOW IN BOTH MODES */
+  /* Ye shadow Dark mode aur Light mode dono mein Orange dikhegi */
+  box-shadow: 0 5px 30px rgba(249, 115, 22, 0.3) !important; 
 }
 
+/* --- TYPOGRAPHY --- */
 .icon {
-  font-size: 3rem;
-  margin-bottom: 10px;
-  /* Icon ko thoda ubharne ke liye */
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  display: inline-block;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
 }
 
 .number {
   font-size: 3rem;
-  font-weight: 800;
-  margin: 0;
-  
-  /* Orange Number */
-  color: #f97316 !important; 
+  font-weight: 600;
+  color: #f97316; /* Orange */
   line-height: 1.2;
+  margin-bottom: 5px;
+  display: block;
 }
 
 .label {
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: capitalize !important; /* Sirf Pehla Akshar Bada */
-  margin-top: 5px;
-  
-  /* Dark Grey Text for Light Mode */
-  color: #374151 !important; 
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4b5563; /* Grey (Light Mode) */
+  text-transform: capitalize;
 }
 
-/* ================= DARK MODE OVERRIDES ================= */
-/* Jab user Dark Mode switch karega, tab ye apply hoga */
-
-:global(body.dark-mode) .card {
-  /* Dark Grey Background */
-  background-color: #111827 !important; 
-  
-  /* Border thoda light */
-  border: 2px solid rgba(249, 115, 22, 0.4) !important; 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
-}
-
-:global(body.dark-mode) .number {
-  color: #f97316 !important; /* Orange text stays */
-  text-shadow: 0 0 15px rgba(249, 115, 22, 0.6) !important; /* Glow Effect */
-}
-
+/* Dark Mode Label Color */
 :global(body.dark-mode) .label {
-  color: #e5e7eb !important; /* Light Text for Dark Mode */
+  color: #cbd5e1; /* Light Grey (Dark Mode) */
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 20px;
+  }
 }
