@@ -24,7 +24,7 @@
   inset: 0; /* Top, Bottom, Left, Right = 0 (Full Cover) */
   z-index: 1;
   transition: background 0.3s ease;
-  backdrop-filter: blur(5px); /* Blur effect */
+  backdrop-filter: blur(6px); /* Blur effect */
   
   /* 👇 LIGHT MODE: White tint */
   background: rgba(255, 255, 255, 0.85);
@@ -33,7 +33,7 @@
 /* 👇 DARK MODE OVERLAY FIX */
 /* Dark mode mein White layer ko hatakar DARK layer laga di */
 :global(body.dark-mode) .section::before {
-  background: rgba(0, 0, 0, 0.9); /* 80% Black Opacity (Image ko dark karega) */
+  background: rgba(15, 23, 42, 0.90); /* 80% Black Opacity (Image ko dark karega) */
 }
 
 /* Content Wrapper */
@@ -115,5 +115,42 @@
 @media (max-width: 768px) {
   .section {
     padding: 60px 20px;
+  }
+}
+/* 👇👇 MOBILE OPTIMIZATION (2x2 Layout) 👇👇 */
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 15px; /* Side padding thodi kam ki */
+  }
+
+  .grid {
+    /* 👇 MAGIC LINE: Ye 2 columns banayegi (2 upar, 2 neeche) */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px; /* Cards ke beech ka gap kam kiya taaki wo fit aa jayein */
+  }
+
+  .card {
+    /* Mobile pe jagah kam hoti hai, isliye padding kam karni padegi */
+    padding: 20px 10px; 
+    border-radius: 15px;
+  }
+
+  .icon {
+    font-size: 2.5rem; /* Icon thoda chhota */
+    margin-bottom: 10px;
+  }
+
+  .number {
+    font-size: 2rem; /* Number thoda chhota taaki 2 line mein na tute */
+    margin-bottom: 5px;
+  }
+  
+  .label {
+    font-size: 0.85rem; /* Text size adjust kiya */
+    line-height: 1.2;
+  }
+  
+  .card:hover {
+      transform: none; /* Mobile pe hover effect hata diya (better experience) */
   }
 }
