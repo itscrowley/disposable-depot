@@ -367,7 +367,7 @@ body.dark-mode .wa-spoof-input { color: white !important; }
   /* 1. Header Pill (Container) Bada Karein */
   header {
     /* Padding badhayein taaki pill khuli aur badi lage */
-    padding: 15px 30px !important; 
+    padding: 10px 20px !important; 
     
     /* Shape ko perfect round capsule banayein */
     border-radius: 100px !important;
