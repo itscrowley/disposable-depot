@@ -375,7 +375,7 @@ ${notes ? `"${notes}"` : "None"}
   {/* 👇👇 CLEAR IMAGE PARALLAX SECTION 👇👇 */}
       <section style={{
           position: 'relative',
-          padding: '40px 0', /* 👈 100px se 50px kar diya (Height kam ho gayi) */
+          padding: '0px 0', /* 👈 100px se 50px kar diya (Height kam ho gayi) */
           marginTop: '30px', /* Thoda margin bhi kam kiya taaki gap kam ho */
           marginBottom: '30px',
           
