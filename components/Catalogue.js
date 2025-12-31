@@ -135,7 +135,7 @@ export default function Catalogue() {
             specialBadge: clean(columns[10]),
             keywords: clean(columns[11]),
             stockQty: stockQty,
-            unit: unit, // Unit added here
+            unit: unit.toUpperCase(), // Unit added here
             isLowStock: stockQty > 0 && stockQty <= lowLimit
           };
         }).filter(item => item !== null && item.title);
