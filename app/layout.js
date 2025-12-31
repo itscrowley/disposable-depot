@@ -3,6 +3,7 @@ import './globals.css';
 // Footer import kar rahe hain (path dhyan se dekhein)
 import Footer from '../components/Footer'; 
 import BackToTop from '../components/BackToTop';
+import { Analytics } from '@vercel/analytics/next';
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
@@ -98,6 +99,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
           />
         {children}
+        <Analytics />
         
         {/* Footer yahan lagaya */}
         <Footer />
