@@ -95,7 +95,14 @@ export default function Catalogue() {
   const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTrqOVzDxQxS_qLSscWFtMck9wLXOZOqON7dx58EWCRP2ZXhxfsT9_bgjEZ5PT5VbMbNrS3z84CLVbt/pub?gid=0&single=true&output=csv';
 
   useEffect(() => {
-    fetch(SHEET_URL)
+    const timestamp = new Date().getTime();
+    fetch(`${SHEET_URL}&t=${timestamp}`, { 
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
+    })
       .then((response) => response.text())
       .then((csvText) => {
         const rows = csvText.split('\n').slice(1);
