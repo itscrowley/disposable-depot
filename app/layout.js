@@ -4,6 +4,7 @@ import './globals.css';
 import Footer from '../components/Footer'; 
 import BackToTop from '../components/BackToTop';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
@@ -100,6 +101,7 @@ export default function RootLayout({ children }) {
           />
         {children}
         <Analytics />
+        <SpeedInsights />
         
         {/* Footer yahan lagaya */}
         <Footer />
