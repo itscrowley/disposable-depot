@@ -1,0 +1,156 @@
+/* --- Stats Section Container --- */
+.section {
+  position: relative; /* Zaroori hai overlay ke liye */
+  padding: 60px 20px;
+  
+  /* Background Image Setting */
+  background-image: url("https://plus.unsplash.com/premium_photo-1681426736883-49a5787eee8e?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Parallax Effect */
+  text-align: center;
+  overflow: hidden;
+  
+  /* Margin fix */
+  margin: 0 !important;
+  width: 100%;
+}
+
+/* --- OVERLAY (The Magic Layer) --- */
+/* Ye layer background image ke upar aati hai */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* Top, Bottom, Left, Right = 0 (Full Cover) */
+  z-index: 1;
+  transition: background 0.3s ease;
+  backdrop-filter: blur(6px); /* Blur effect */
+  
+  /* 👇 LIGHT MODE: White tint */
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* 👇 DARK MODE OVERLAY FIX */
+/* Dark mode mein White layer ko hatakar DARK layer laga di */
+:global(body.dark-mode) .section::before {
+  background: rgba(15, 23, 42, 0.90); /* 80% Black Opacity (Image ko dark karega) */
+}
+
+/* Content Wrapper */
+.container {
+  position: relative;
+  z-index: 2; /* Overlay ke upar content */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- GRID LAYOUT --- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  padding: 10px;
+}
+
+/* --- CARD DESIGN (Base) --- */
+.card {
+  padding: 20px 25px;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: default;
+  
+  /* Light Mode Colors */
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05); /* Very subtle default shadow */
+}
+
+/* --- CARD DESIGN (Dark Mode) --- */
+:global(body.dark-mode) .card {
+  background: #1e293b; /* Dark Grey/Blue */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* --- HOVER EFFECT (Common for BOTH Modes) --- */
+.card:hover {
+  transform: translateY(-10px);
+  
+  /* 👇 FORCE ORANGE SHADOW IN BOTH MODES */
+  /* Ye shadow Dark mode aur Light mode dono mein Orange dikhegi */
+  box-shadow: 0 5px 30px rgba(249, 115, 22, 0.3) !important; 
+}
+
+/* --- TYPOGRAPHY --- */
+.icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  display: inline-block;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.number {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #f97316; /* Orange */
+  line-height: 1.2;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4b5563; /* Grey (Light Mode) */
+  text-transform: capitalize;
+}
+
+/* Dark Mode Label Color */
+:global(body.dark-mode) .label {
+  color: #cbd5e1; /* Light Grey (Dark Mode) */
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 20px;
+  }
+}
+/* 👇👇 MOBILE OPTIMIZATION (2x2 Layout) 👇👇 */
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 15px; /* Side padding thodi kam ki */
+  }
+
+  .grid {
+    /* 👇 MAGIC LINE: Ye 2 columns banayegi (2 upar, 2 neeche) */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px; /* Cards ke beech ka gap kam kiya taaki wo fit aa jayein */
+  }
+
+  .card {
+    /* Mobile pe jagah kam hoti hai, isliye padding kam karni padegi */
+    padding: 20px 10px; 
+    border-radius: 15px;
+  }
+
+  .icon {
+    font-size: 2.5rem; /* Icon thoda chhota */
+    margin-bottom: 10px;
+  }
+
+  .number {
+    font-size: 2rem; /* Number thoda chhota taaki 2 line mein na tute */
+    margin-bottom: 5px;
+  }
+  
+  .label {
+    font-size: 0.85rem; /* Text size adjust kiya */
+    line-height: 1.2;
+  }
+  
+  .card:hover {
+      transform: none; /* Mobile pe hover effect hata diya (better experience) */
+  }
+}
