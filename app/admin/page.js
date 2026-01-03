@@ -69,7 +69,7 @@ export default function AdminPanel() {
     if (passwordInput === ADMIN_PASSWORD) {
       setIsAuthenticated(true);
     } else {
-      alert("❌ Galat Password! Access Denied.");
+      alert("❌ Wrong Password! Access Denied.");
       setPasswordInput("");
     }
   };
@@ -150,7 +150,7 @@ export default function AdminPanel() {
         body: JSON.stringify(finalData)
       });
 
-      alert("🎉 Product Live ho gaya!");
+      alert("🎉 Product is Live!");
       setFormData({ id: '', title: '', category: categories[0], desc: '', tag: tags[0], alt: '', keywords: '', stockQty: '100', unit: 'PCS' });
       setSelectedFiles([]); setPreviewUrls([]); setProgress(0);
 
