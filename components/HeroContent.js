@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function HeroContent() {
+export default function HeroContent({ dynamicTitle }) {
   return (
     <div className="hero-content" style={{ 
       textAlign: 'center', 
@@ -10,9 +10,17 @@ export default function HeroContent() {
     }}>
       {/* --- SEO CHANGE: "Your Area" ko "Jalandhar" se replace kiya --- */}
       <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', lineHeight: '1.4', color: 'var(--text-main)' }}>
-        Best Wholesale Prices in <br /> 
-        <span style={{ color: '#e46338' }}>Jalandhar</span> for <br />
-        Packaged Water & Disposables
+        {dynamicTitle ? (
+          // Agar Admin Panel se title aaya hai to wo dikhao
+          dynamicTitle
+        ) : (
+          // Varna aapka purana default design/text
+          <>
+            Best Wholesale Prices in <br /> 
+            <span style={{ color: '#e46338' }}>Jalandhar</span> for <br />
+            Packaged Water & Disposables
+          </>
+        )}
       </h1>
       
       {/* --- SEO CHANGE: "Supplier", "Events" aur "Catering" keywords add kiye --- */}
