@@ -228,8 +228,8 @@ export default function AdminPanel() {
         <div className={`${theme.card} backdrop-blur-xl border shadow-2xl max-w-sm w-full rounded-3xl overflow-hidden relative z-10 transition-colors duration-300`}>
           <div className={`p-8 flex flex-col items-center relative border-b ${darkMode ? 'border-white/10' : 'border-slate-200'}`}>
             <div className="absolute top-6 right-6 z-20 scale-[0.8] origin-top-right"><ThemeSwitch /></div>
-            <div className="bg-gradient-to-br from-orange-500 to-red-600 p-4 rounded-2xl mb-1 shadow-lg shadow-orange-500/30">
-              <img src="/logo.png" alt="Logo" className="w-24 h-24 object-contain" />
+            <div className="p-0.0 rounded-2xl mb-0.5 shadow-lg shadow-orange-100/300">
+              <img src="/logo.png" alt="Logo" className="w-50 h-50 object-contain" />
             </div>
             <h2 className={`text-2xl font-bold tracking-tight ${theme.textMain}`}>Admin Access</h2>
             <p className={`text-sm mt-1 font-medium ${theme.textSub}`}>Enter PIN to manage inventory</p>
@@ -267,7 +267,7 @@ export default function AdminPanel() {
       <div className={`${theme.card} w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden border backdrop-blur-xl relative z-10 transition-colors duration-300`}>
         <div className="backdrop-blur-md p-6 md:p-8 flex items-center justify-between sticky top-0 z-20 border-b bg-gradient-to-r from-orange-600/90 to-red-600/90 border-white/10 text-white">
           <div><h1 className="text-xl md:text-3xl font-bold tracking-tight">Add Product</h1><p className="text-xs md:text-base mt-1 text-orange-100 opacity-90">Inventory Manager</p></div>
-          <div className="flex items-center gap-4"><div className="scale-[0.8] origin-right"><ThemeSwitch /></div><div className="p-2 md:p-3 rounded-2xl backdrop-blur-md border bg-white/10 border-white/20"><img src="/logo.png" alt="Logo" className="w-10 h-10 md:w-16 md:h-16 object-contain" /></div></div>
+          <div className="flex items-center gap-4"><div className="scale-[0.8] origin-right"><ThemeSwitch /></div><div><img src="/logo.png" alt="Logo" className="w-12 h-12 md:w-28 md:h-28 object-contain" /></div></div>
         </div>
 
         {loading && (
