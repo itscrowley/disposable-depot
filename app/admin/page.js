@@ -239,12 +239,17 @@ export default function AdminPanel() {
               <ThemeSwitch />
             </div>
 
-            <div className="bg-gradient-to-br from-orange-500 to-red-600 p-4 rounded-2xl mb-4 shadow-lg shadow-orange-500/30">
-              <Lock className="text-white w-8 h-8" />
-            </div>
-            <h2 className={`text-2xl font-bold tracking-tight ${theme.textMain}`}>Admin Access</h2>
-            <p className={`text-sm mt-1 font-medium ${theme.textSub}`}>Enter PIN to manage inventory</p>
+            <div className="p-0.1 rounded-2xl mb-0.2 shadow-lg shadow-orange-500/300">
+              {/* 🔥 UPDATED: REPLACED LOCK WITH BIGGER LOGO */}
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              className="w-48 h-48 object-contain"  // <-- Yahan size badhaya hai (w-8 se w-24)
+            />
           </div>
+          <h2 className={`text-2xl font-bold tracking-tight ${theme.textMain}`}>TDD Admin</h2>
+          <p className={`text-sm mt-1 font-medium ${theme.textSub}`}>Enter PIN to manage inventory</p>
+        </div>
           
           <form onSubmit={handleLogin} className="p-8 space-y-6">
             <div>
@@ -322,13 +327,13 @@ export default function AdminPanel() {
              <div className="scale-[0.8] origin-right">
                 <ThemeSwitch />
              </div>
-             {/* Logo Box - Replaced Cloud Icon with Image */}
-             <div className="p-0.05 md:p-0.02 rounded-2xl backdrop-blur-md border bg-white/10 border-white/1">
-                {/* 🔴 Yahan Apni Logo File ka naam likhein */}
+             {/* Logo Box - Always Glassy White on Orange Header */}
+             <div className="p-2 md:p-3 rounded-2xl backdrop-blur-md border bg-white/10 border-white/20">
+                {/* 🔥 REPLACED UPLOAD ICON WITH LOGO */}
                 <img 
                   src="/logo.png" 
                   alt="Logo" 
-                  className="w-6 h-6 md:w-28 md:h-28 object-contain"
+                  className="w-6 h-6 md:w-8 md:h-8 object-contain"
                 />
              </div>
           </div>
