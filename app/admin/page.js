@@ -311,19 +311,25 @@ export default function AdminPanel() {
 
       <div className={`${theme.card} w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden border backdrop-blur-xl relative z-10 transition-colors duration-300`}>
         
-        {/* Header */}
-        <div className={`backdrop-blur-md p-6 md:p-8 flex items-center justify-between sticky top-0 z-20 border-b ${darkMode ? 'bg-gradient-to-r from-orange-600/90 to-red-600/90 border-white/10 text-white' : 'bg-white/80 border-slate-200 text-slate-900'}`}>
+        {/* Header - ALWAYS ORANGE NOW */}
+        <div className="backdrop-blur-md p-6 md:p-8 flex items-center justify-between sticky top-0 z-20 border-b bg-gradient-to-r from-orange-600/90 to-red-600/90 border-white/10 text-white">
           <div>
             <h1 className="text-xl md:text-3xl font-bold tracking-tight">Add Product</h1>
-            <p className={`text-xs md:text-base mt-1 ${darkMode ? 'text-orange-100 opacity-90' : 'text-slate-500'}`}>Inventory Manager</p>
+            <p className="text-xs md:text-base mt-1 text-orange-100 opacity-90">Inventory Manager</p>
           </div>
           
           <div className="flex items-center gap-4">
              <div className="scale-[0.8] origin-right">
                 <ThemeSwitch />
              </div>
-             <div className={`p-2 md:p-3 rounded-2xl backdrop-blur-md border ${darkMode ? 'bg-white/10 border-white/20' : 'bg-slate-100 border-slate-200'}`}>
-                <UploadCloud size={24} className={darkMode ? "text-white" : "text-slate-700"} />
+             {/* Logo Box - Replaced Cloud Icon with Image */}
+             <div className="p-0.05 md:p-0.02 rounded-2xl backdrop-blur-md border bg-white/10 border-white/1">
+                {/* 🔴 Yahan Apni Logo File ka naam likhein */}
+                <img 
+                  src="/logo.png" 
+                  alt="Logo" 
+                  className="w-6 h-6 md:w-28 md:h-28 object-contain"
+                />
              </div>
           </div>
         </div>
