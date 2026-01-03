@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from 'react';
-// Added 'Smile' icon for Category Icon input
-import { UploadCloud, CheckCircle, Loader2, Image as ImageIcon, Plus, Trash2, Lock, KeyRound, Eye, EyeOff, Sun, Moon, X, ChevronDown, Smile } from 'lucide-react';
+// 🔥 Added 'Settings' icon here
+import { UploadCloud, CheckCircle, Loader2, Image as ImageIcon, Plus, Trash2, Lock, KeyRound, Eye, EyeOff, Sun, Moon, X, ChevronDown, Smile, Settings } from 'lucide-react';
 
 export default function AdminPanel() {
   // --- THEME STATE ---
@@ -74,6 +74,11 @@ export default function AdminPanel() {
   // 🔥 NEW: Toggle for adding Icon
   const [isAddingIcon, setIsAddingIcon] = useState(false);
   const [newIcon, setNewIcon] = useState("");
+
+  // 🔥 NEW: SETTINGS MODAL STATE (Glow Strip)
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [configData, setConfigData] = useState({ glowText: "", showGlow: true });
+  const [configLoading, setConfigLoading] = useState(false);
 
   // --- HANDLERS ---
   const handleLogin = (e) => {
@@ -200,6 +205,27 @@ export default function AdminPanel() {
     } catch (error) { alert("Error: " + error.message); } finally { setLoading(false); }
   };
 
+  // --- 🔥 NEW: HANDLE CONFIG UPDATE (Glow Strip) ---
+  const handleUpdateConfig = async () => {
+    if(!configData.glowText) return alert("Enter some text for the glow strip!");
+    setConfigLoading(true);
+    
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST", mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "updateConfig", // Tells script to update config tab
+          glowText: configData.glowText,
+          showGlow: configData.showGlow
+        })
+      });
+      alert("✅ Website Settings Updated! Refresh site to see changes.");
+      setShowSettingsModal(false);
+    } catch (error) { alert("Failed to update settings"); } 
+    finally { setConfigLoading(false); }
+  };
+
   const theme = {
     card: darkMode ? "bg-black/40 border-white/10" : "bg-white/80 border-white/60 shadow-xl", 
     textMain: darkMode ? "text-white" : "text-slate-900",
@@ -267,7 +293,19 @@ export default function AdminPanel() {
       <div className={`${theme.card} w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden border backdrop-blur-xl relative z-10 transition-colors duration-300`}>
         <div className="backdrop-blur-md p-6 md:p-8 flex items-center justify-between sticky top-0 z-20 border-b bg-gradient-to-r from-orange-600/90 to-red-600/90 border-white/10 text-white">
           <div><h1 className="text-xl md:text-3xl font-bold tracking-tight">Add Product</h1><p className="text-xs md:text-base mt-1 text-orange-100 opacity-90">Inventory Manager</p></div>
-          <div className="flex items-center gap-4"><div className="scale-[0.8] origin-right"><ThemeSwitch /></div><div><img src="/logo.png" alt="Logo" className="w-12 h-12 md:w-28 md:h-28 object-contain" /></div></div>
+          <div className="flex items-center gap-4">
+            <div className="scale-[0.8] origin-right"><ThemeSwitch /></div>
+            
+            {/* 🔥 UPDATED: SETTINGS BUTTON ADDED HERE */}
+            <button 
+              onClick={() => setShowSettingsModal(true)}
+              className="p-3 rounded-2xl backdrop-blur-md border bg-white/10 border-white/20 hover:bg-white/20 transition active:scale-95"
+            >
+              <Settings className="w-6 h-6 text-white" />
+            </button>
+
+            <div><img src="/logo.png" alt="Logo" className="w-12 h-12 md:w-28 md:h-28 object-contain" /></div>
+          </div>
         </div>
 
         {loading && (
@@ -330,7 +368,7 @@ export default function AdminPanel() {
               )}
             </div>
 
-            {/* 🔥 NEW: Category Icon Dropdown (With Add New Option) */}
+            {/* Category Icon Dropdown */}
             <div>
               <div className="flex justify-between items-center mb-2"><label className={`text-sm font-bold uppercase tracking-wide ${theme.textSub}`}>Category Icon</label>{!isAddingIcon && (<button type="button" onClick={() => setIsAddingIcon(true)} className={`text-xs font-bold flex items-center p-2 rounded-lg border transition-colors ${theme.addNewBtn}`}><Plus size={14} className="mr-1"/> New</button>)}</div>
               {isAddingIcon ? (
@@ -378,6 +416,48 @@ export default function AdminPanel() {
           </button>
         </form>
       </div>
+
+      {/* 🔥 NEW: SETTINGS MODAL */}
+      {showSettingsModal && (
+        <div className="fixed inset-0 z-[100000] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className={`w-full max-w-md p-6 rounded-2xl shadow-2xl relative border ${theme.card} ${darkMode ? 'bg-slate-900' : 'bg-white'}`}>
+            <button onClick={() => setShowSettingsModal(false)} className="absolute top-4 right-4 text-slate-400 hover:text-red-500"><X size={24} /></button>
+            <h2 className={`text-xl font-bold mb-4 flex items-center gap-2 ${theme.textMain}`}><Settings className="text-orange-500"/> Website Settings</h2>
+            
+            <div className="space-y-4">
+              <div>
+                <label className={`block text-sm font-bold mb-2 ${theme.textSub}`}>Glow Strip Text</label>
+                <input 
+                  type="text" 
+                  value={configData.glowText} 
+                  onChange={(e) => setConfigData({...configData, glowText: e.target.value})} 
+                  placeholder="🔥 Diwali Sale | ⚡ Flat 50% Off" 
+                  className={`w-full p-3 rounded-xl border ${theme.input} focus:border-orange-500`} 
+                />
+                <p className="text-xs text-slate-500 mt-1">Use <b>|</b> to separate multiple messages.</p>
+              </div>
+
+              <div className="flex items-center justify-between p-3 rounded-xl border border-white/10 bg-white/5">
+                <span className={`font-bold ${theme.textMain}`}>Show Glow Strip</span>
+                <button 
+                  onClick={() => setConfigData({...configData, showGlow: !configData.showGlow})}
+                  className={`w-12 h-6 rounded-full p-1 transition-colors ${configData.showGlow ? 'bg-green-500' : 'bg-slate-600'}`}
+                >
+                  <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform ${configData.showGlow ? 'translate-x-6' : 'translate-x-0'}`} />
+                </button>
+              </div>
+
+              <button 
+                onClick={handleUpdateConfig} 
+                disabled={configLoading}
+                className="w-full py-3 rounded-xl font-bold text-white bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 transition shadow-lg"
+              >
+                {configLoading ? "Updating..." : "Save Changes"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
