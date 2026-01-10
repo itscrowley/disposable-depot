@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useMemo } from 'react';
-import { Search, X } from 'lucide-react';
+import { Search, X } from 'lucide-react'; 
 
 // --- HELPERS (Unchanged) ---
 const getCategoryIcon = (category) => {
@@ -40,9 +40,9 @@ export default function Catalogue() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  // States
+  // --- STATES ---
   const [activeCategory, setActiveCategory] = useState('All');
-  const [activeSubCategory, setActiveSubCategory] = useState('All');
+  const [activeSubCategory, setActiveSubCategory] = useState('All'); 
 
   const [searchQuery, setSearchQuery] = useState('');
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -50,7 +50,7 @@ export default function Catalogue() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // Swipe States for Lightbox
+  // Swipe States
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
@@ -74,7 +74,7 @@ export default function Catalogue() {
           const id = clean(columns[0]);           
           const title = clean(columns[1]);        
           const category = clean(columns[2]);     
-          const subCategory = clean(columns[3]);  
+          const subCategory = clean(columns[3]); 
 
           const desc = clean(columns[4]);         
           const tag = clean(columns[5]);          
@@ -118,7 +118,7 @@ export default function Catalogue() {
         if (!map[item.category]) {
           map[item.category] = new Set(); 
         }
-        map[item.category].add(item.subCategory);
+        item.subCategory.split(',').forEach(sub => map[item.category].add(sub.trim()));
       }
     });
 
@@ -131,10 +131,14 @@ export default function Catalogue() {
 
   const categories = ['All', ...new Set(items.map(item => item.category).filter(Boolean))];
 
+  // 🔥 FILTER LOGIC: Hide Sub-Category Products from 'All' Screen
   const filteredItems = items.filter(item => {
+    if (activeCategory === 'All' && item.subCategory && item.subCategory.trim() !== '') {
+        return false; 
+    }
     const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
     const matchesSubCategory = activeSubCategory === 'All' || 
-                               (item.subCategory && item.subCategory.toLowerCase() === activeSubCategory.toLowerCase());
+                               (item.subCategory && item.subCategory.toLowerCase().includes(activeSubCategory.toLowerCase()));
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           (item.keywords && item.keywords.toLowerCase().includes(searchQuery.toLowerCase())) ||
                           item.category.toLowerCase().includes(searchQuery.toLowerCase());
@@ -159,30 +163,17 @@ export default function Catalogue() {
   };
   const closeLightbox = () => setLightboxOpen(false);
   
-  // Navigation
-  const nextImg = (e) => { 
-    if(e) e.stopPropagation(); 
-    setCurrentIndex((prev) => (prev + 1) % currentProduct.images.length); 
-  };
-  const prevImg = (e) => { 
-    if(e) e.stopPropagation(); 
-    setCurrentIndex((prev) => (prev - 1 + currentProduct.images.length) % currentProduct.images.length); 
-  };
+  const nextImg = (e) => { if(e) e.stopPropagation(); setCurrentIndex((prev) => (prev + 1) % currentProduct.images.length); };
+  const prevImg = (e) => { if(e) e.stopPropagation(); setCurrentIndex((prev) => (prev - 1 + currentProduct.images.length) % currentProduct.images.length); };
 
-  // 🔥 SWIPE LOGIC FOR LIGHTBOX ONLY
   const minSwipeDistance = 50;
-  const onTouchStart = (e) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
+  const onTouchStart = (e) => { setTouchEnd(null); setTouchStart(e.targetTouches[0].clientX); };
   const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-    if (isLeftSwipe) nextImg(); // Next
-    if (isRightSwipe) prevImg(); // Prev
+    if (distance > minSwipeDistance) nextImg(); 
+    if (distance < -minSwipeDistance) prevImg(); 
   };
 
   return (
@@ -206,7 +197,7 @@ export default function Catalogue() {
 
         .catalogue-section { background-color: var(--cat-bg); padding: 50px 20px; transition: background-color 0.3s ease; }
         .search-container { width: 100%; max-width: 500px; margin: 0 auto 30px auto; position: relative; }
-        .search-input { width: 100%; padding: 12px 45px 12px 45px; border-radius: 50px; border: 2px solid var(--card-border); background: var(--card-bg); color: var(--card-title); outline: none; }
+        .search-input { width: 100%; padding: 12px 45px; border-radius: 50px; border: 2px solid var(--card-border); background: var(--card-bg); color: var(--card-title); outline: none; }
         .search-input:focus { border-color: #e46338; }
         
         .suggestions-list { position: absolute; top: 100%; left: 0; width: 100%; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 15px; z-index: 200; box-shadow: 0 10px 20px rgba(0,0,0,0.1); list-style: none; padding: 10px 0; margin-top: 5px; }
@@ -237,23 +228,22 @@ export default function Catalogue() {
         .catalogue-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
         @media (min-width: 1024px) { .catalogue-grid { gap: 30px; grid-template-columns: repeat(4, 1fr); } }
 
-        /* 🔥 LIGHTBOX DOTS STYLE */
-        .lb-dots-container {
-          position: absolute; bottom: 80px; left: 0; right: 0;
-          display: flex; justify-content: center; gap: 8px; z-index: 2002;
-        }
-        .lb-dot {
-          width: 8px; height: 8px; border-radius: 50%;
-          background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s;
-        }
-        .lb-dot.active {
-          background: #e46338; width: 10px; height: 10px; transform: scale(1.2);
-        }
-        /* Mobile adjustment for dots */
-        @media (max-width: 768px) {
-           .lb-dots-container { bottom: 60px; }
+        .size-tag {
+            font-size: 0.7rem; padding: 3px 8px; background-color: #fff3e0; color: #e46338;
+            border: 1px solid #e46338; border-radius: 20px; font-weight: 600; white-space: nowrap;
         }
 
+        #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; display: none; align-items: center; justify-content: center; flex-direction: column; }
+        #lightbox.active { display: flex !important; }
+        .lb-content { position: relative; width: 90%; height: 80%; display: flex; align-items: center; justify-content: center; }
+        #lightImg { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        #close { position: absolute; top: 20px; right: 20px; font-size: 40px; color: white; background: none; border: none; cursor: pointer; z-index: 3001; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); color: white; border: none; font-size: 24px; padding: 15px; cursor: pointer; border-radius: 50%; transition: background 0.3s; z-index: 3001; }
+        #prev { left: 10px; } #next { right: 10px; }
+        .lb-dots-container { position: absolute; bottom: -40px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; }
+        .lb-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); }
+        .lb-dot.active { background: #e46338; transform: scale(1.2); }
+        
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
 
@@ -262,42 +252,15 @@ export default function Catalogue() {
           <h2 className="main-title" style={{fontSize: '2rem', marginBottom: '10px'}}>Our Catalogue</h2>
         </div>
 
-        {/* --- SEARCH BAR --- */}
-        <div className="search-container" style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', pointerEvents: 'none' }}>
-            <Search size={20} />
-          </div>
-
-          <input 
-            type="text" 
-            placeholder="Search for coffee cups, bowls or plates..." 
-            className="search-input"
-            value={searchQuery}
-            onChange={(e) => {setSearchQuery(e.target.value); setShowSuggestions(true);}}
-            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          />
-
-          {searchQuery && (
-            <button 
-              onClick={() => { setSearchQuery(""); setShowSuggestions(false); }}
-              style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', cursor: 'pointer', color: '#9ca3af', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '5px' }}
-            >
-              <X size={20} />
-            </button>
-          )}
-
-          {showSuggestions && suggestions.length > 0 && (
-            <ul className="suggestions-list">
-              {suggestions.map(s => (
-                <li key={s.id} className="suggestion-item" onClick={() => {setSearchQuery(s.title); setShowSuggestions(false);}}>
-                  {s.title}
-                </li>
-              ))}
-            </ul>
-          )}
+        {/* SEARCH */}
+        <div className="search-container">
+          <div style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af' }}> <Search size={20} /> </div>
+          <input type="text" placeholder="Search..." className="search-input" value={searchQuery} onChange={(e) => {setSearchQuery(e.target.value); setShowSuggestions(true);}} onBlur={() => setTimeout(() => setShowSuggestions(false), 200)} />
+          {searchQuery && <button onClick={() => { setSearchQuery(""); setShowSuggestions(false); }} style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', color: '#9ca3af' }}><X size={20} /></button>}
+          {showSuggestions && suggestions.length > 0 && <ul className="suggestions-list">{suggestions.map(s => <li key={s.id} className="suggestion-item" onClick={() => {setSearchQuery(s.title); setShowSuggestions(false);}}>{s.title}</li>)}</ul>}
         </div>
         
-        {/* --- MAIN CATEGORIES --- */}
+        {/* MAIN CATEGORIES */}
         {!loading && (
           <div className="category-scroll" style={{ display: 'flex', overflowX: 'auto', gap: '12px', padding: '10px 5px 20px 5px', marginBottom: '10px' }}>
             <div style={{display:'flex', gap:'12px', margin: '0 auto'}}> 
@@ -319,7 +282,7 @@ export default function Catalogue() {
           </div>
         )}
 
-        {/* --- SUB-CATEGORIES --- */}
+        {/* 🔥 SUB-CATEGORIES (FILTERS) */}
         {!loading && activeCategory !== 'All' && subCategoriesMap[activeCategory] && subCategoriesMap[activeCategory].length > 0 && (
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '8px', marginBottom: '30px', animation: 'fadeInDown 0.4s ease-out' }}>
             <button
@@ -352,57 +315,58 @@ export default function Catalogue() {
           </div>
         )}
 
-        {/* --- PRODUCTS GRID --- */}
+        {/* PRODUCTS GRID */}
         <div className="catalogue-grid">
           {!loading && filteredItems.length > 0 ? (
             filteredItems.map((product) => (
               <div key={product.id} className="modern-card" style={{ opacity: product.isAvailable ? 1 : 0.8 }}>
+                
+                {/* --- IMAGE --- */}
                 <div className="img-container" onClick={() => product.isAvailable && openGallery(product)} style={{cursor: product.isAvailable ? 'pointer' : 'default'}}>
                   {product.specialBadge && <span className="special-badge">{product.specialBadge}</span>}
                   {!product.isAvailable && <div className="out-of-stock-overlay">OUT OF STOCK</div>}
-                  {product.tag && (
-                    <span style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 11, backgroundColor: '#e46338', color: 'white', padding: '3px 10px', borderRadius: '50px', fontSize: '0.65rem', fontWeight: 'bold' }}>
-                      {product.tag}
-                    </span>
-                  )}
-                  <img 
-                    src={optimizeImage(product.images[0], false)} 
-                    alt={product.alt} 
-                    loading="lazy" 
-                    style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
-                  />
+                  {product.tag && ( <span style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 11, backgroundColor: '#e46338', color: 'white', padding: '3px 10px', borderRadius: '50px', fontSize: '0.65rem', fontWeight: 'bold' }}>{product.tag}</span> )}
+                  <img src={optimizeImage(product.images[0], false)} alt={product.alt} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </div>
 
                 <div style={{ padding: '15px', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                  <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                    <span style={{fontSize:'0.75rem', color:'#888', fontWeight:'600'}}>{product.category}</span>
-                    {product.subCategory && <span style={{fontSize:'0.7rem', color:'#e46338', background:'#fff3e0', padding:'2px 6px', borderRadius:'4px'}}>{product.subCategory}</span>}
+                  
+                  {/* --- TITLE & CATEGORY (Always Visible) --- */}
+                  <div>
+                      <span style={{fontSize:'0.75rem', color:'#888', fontWeight:'600', display:'block', marginBottom:'2px'}}>{product.category}</span>
+                      <h3 className="card-title" style={{ margin: '0', fontSize: '1.1rem', lineHeight:'1.3' }}>{product.title}</h3>
                   </div>
-                  
-                  <h3 className="card-title" style={{ margin: '5px 0', fontSize: '1.1rem' }}>{product.title}</h3>
-                  
-                  {product.isLowStock && product.isAvailable && (
-                    <div className="low-stock-warning">
-                      ⚠️ ONLY {product.stockQty} {product.unit} LEFT!
+
+                  {/* 🔥 SUB-CATEGORIES (RESTORED TO ALWAYS VISIBLE) */}
+                  {product.subCategory && (
+                    <div style={{marginBottom: '10px', marginTop: '5px', display:'flex', flexWrap:'wrap', gap:'5px'}}>
+                        {product.subCategory.split(',').map((size, index) => (
+                            <span key={index} className="size-tag">{size.trim()}</span>
+                        ))}
                     </div>
                   )}
 
-                  {product.price && <div className="price-val">₹{product.price}</div>}
-
-                  <p className="card-desc" style={{ fontSize: '0.85rem', marginBottom: '15px' }}>{product.desc}</p>
+                  {product.isLowStock && product.isAvailable && ( <div className="low-stock-warning">⚠️ ONLY {product.stockQty} {product.unit} LEFT!</div> )}
+                  
+                  {/* Price Logic Fixed */}
+                  {product.price && product.price !== '0' && <div className="price-val" style={{fontSize: '1.2rem', fontWeight: '800', color: '#e46338', margin: '5px 0'}}>₹{product.price}</div>}
+                  
+                  <p className="card-desc" style={{ fontSize: '0.85rem', marginBottom: '15px', color:'#555', lineHeight:'1.5' }}>{product.desc}</p>
 
                   <div style={{ marginTop: 'auto' }}>
                       <a href={product.isAvailable ? getWhatsAppLink(product) : "#"} target={product.isAvailable ? "_blank" : "_self"}
                       style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', width: '100%', padding: '10px',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', width: '100%', padding: '12px',
                         background: product.isAvailable ? 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)' : '#cccccc', 
-                        color: 'white', borderRadius: '50px', textDecoration: 'none', fontWeight: '700', fontSize: '0.85rem',
+                        color: 'white', borderRadius: '50px', textDecoration: 'none', fontWeight: '700', fontSize: '0.9rem',
+                        boxShadow: product.isAvailable ? '0 4px 10px rgba(37, 211, 102, 0.3)' : 'none',
                         pointerEvents: product.isAvailable ? 'auto' : 'none'
                       }}
                       >
-                        <i className="fab fa-whatsapp"></i> {product.isAvailable ? product.btnText : "Sold Out"}
+                        <i className="fab fa-whatsapp" style={{fontSize:'1.1rem'}}></i> {product.isAvailable ? product.btnText : "Sold Out"}
                       </a>
                   </div>
+
                 </div>
               </div>
             ))
