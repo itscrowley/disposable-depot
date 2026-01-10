@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useMemo } from 'react';
-import { Search, X } from 'lucide-react'; 
+import { Search, X } from 'lucide-react';
 
 // --- HELPERS (Unchanged) ---
 const getCategoryIcon = (category) => {
@@ -54,6 +54,9 @@ export default function Catalogue() {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
+  // CLICK TO SHOW STATE
+  const [activeCardId, setActiveCardId] = useState(null);
+
   const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTrqOVzDxQxS_qLSscWFtMck9wLXOZOqON7dx58EWCRP2ZXhxfsT9_bgjEZ5PT5VbMbNrS3z84CLVbt/pub?gid=0&single=true&output=csv';
 
   useEffect(() => {
@@ -88,7 +91,12 @@ export default function Catalogue() {
           const btnText = clean(columns[8]) || 'Ask Price';     
           const isAvailable = clean(columns[9]).toLowerCase() !== 'out of stock'; 
           const price = clean(columns[10]);       
-          const specialBadge = clean(columns[11]);
+          
+          // PIN LOGIC
+          const rawBadge = clean(columns[11]);
+          const isPinned = rawBadge.toLowerCase() === 'pin'; 
+          const specialBadge = isPinned ? '' : rawBadge; 
+
           const keywords = clean(columns[12]);    
           
           const stockQty = parseInt(clean(columns[14])) || 0; 
@@ -102,7 +110,8 @@ export default function Catalogue() {
             btnText, isAvailable, price, specialBadge, keywords,
             stockQty,
             unit: unit.toUpperCase(),
-            isLowStock: stockQty > 0 && stockQty <= lowLimit
+            isLowStock: stockQty > 0 && stockQty <= lowLimit,
+            isPinned
           };
         }).filter(item => item !== null && item.title);
         
@@ -131,23 +140,38 @@ export default function Catalogue() {
 
   const categories = ['All', ...new Set(items.map(item => item.category).filter(Boolean))];
 
-  // 🔥 FILTER LOGIC: Hide Sub-Category Products from 'All' Screen
+  // 🔥 FILTER LOGIC UPDATED FOR PINNED ITEMS 🔥
   const filteredItems = items.filter(item => {
-    if (activeCategory === 'All' && item.subCategory && item.subCategory.trim() !== '') {
+    
+    // Rule: Hide Sub-Category Products from 'All' Screen...
+    // UNLESS the item is PINNED. If Pinned, show it even on 'All' screen.
+    if (activeCategory === 'All' && item.subCategory && item.subCategory.trim() !== '' && !item.isPinned) {
         return false; 
     }
+
     const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
     const matchesSubCategory = activeSubCategory === 'All' || 
                                (item.subCategory && item.subCategory.toLowerCase().includes(activeSubCategory.toLowerCase()));
+    
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           (item.keywords && item.keywords.toLowerCase().includes(searchQuery.toLowerCase())) ||
                           item.category.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSubCategory && matchesSearch;
+  })
+  // SORTING: Pinned items go to top
+  .sort((a, b) => {
+    if (a.isPinned && !b.isPinned) return -1;
+    if (!a.isPinned && b.isPinned) return 1;
+    return 0;
   });
 
   const handleCategoryClick = (cat) => {
     setActiveCategory(cat);
     setActiveSubCategory('All'); 
+  };
+
+  const toggleCard = (id) => {
+    setActiveCardId(prevId => prevId === id ? null : id);
   };
 
   const suggestions = searchQuery.length > 1 
@@ -231,6 +255,21 @@ export default function Catalogue() {
         .size-tag {
             font-size: 0.7rem; padding: 3px 8px; background-color: #fff3e0; color: #e46338;
             border: 1px solid #e46338; border-radius: 20px; font-weight: 600; white-space: nowrap;
+        }
+
+        /* Accordion Transition Style */
+        .card-details {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease;
+        }
+        .card-details.open {
+            max-height: 500px; 
+            opacity: 1;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--card-border);
         }
 
         #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; display: none; align-items: center; justify-content: center; flex-direction: column; }
@@ -321,7 +360,7 @@ export default function Catalogue() {
             filteredItems.map((product) => (
               <div key={product.id} className="modern-card" style={{ opacity: product.isAvailable ? 1 : 0.8 }}>
                 
-                {/* --- IMAGE --- */}
+                {/* --- IMAGE (With Tag & Badge) --- */}
                 <div className="img-container" onClick={() => product.isAvailable && openGallery(product)} style={{cursor: product.isAvailable ? 'pointer' : 'default'}}>
                   {product.specialBadge && <span className="special-badge">{product.specialBadge}</span>}
                   {!product.isAvailable && <div className="out-of-stock-overlay">OUT OF STOCK</div>}
@@ -331,13 +370,20 @@ export default function Catalogue() {
 
                 <div style={{ padding: '15px', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                   
-                  {/* --- TITLE & CATEGORY (Always Visible) --- */}
-                  <div>
-                      <span style={{fontSize:'0.75rem', color:'#888', fontWeight:'600', display:'block', marginBottom:'2px'}}>{product.category}</span>
-                      <h3 className="card-title" style={{ margin: '0', fontSize: '1.1rem', lineHeight:'1.3' }}>{product.title}</h3>
+                  {/* --- TITLE & CATEGORY --- */}
+                  <div 
+                    onClick={() => toggleCard(product.id)} 
+                    style={{cursor: 'pointer'}}
+                  >
+                    <div>
+                        <span style={{fontSize:'0.75rem', color:'#888', fontWeight:'600', display:'block', marginBottom:'2px'}}>{product.category}</span>
+                        <h3 className="card-title" style={{ margin: '0', fontSize: '1.1rem', lineHeight:'1.3' }}>{product.title}</h3>
+                    </div>
                   </div>
 
-                  {/* 🔥 SUB-CATEGORIES (RESTORED TO ALWAYS VISIBLE) */}
+                  {/* 🔥 EVERYTHING VISIBLE (No Click Needed) */}
+                  
+                  {/* Sub-Categories (Sizes) */}
                   {product.subCategory && (
                     <div style={{marginBottom: '10px', marginTop: '5px', display:'flex', flexWrap:'wrap', gap:'5px'}}>
                         {product.subCategory.split(',').map((size, index) => (
@@ -348,9 +394,10 @@ export default function Catalogue() {
 
                   {product.isLowStock && product.isAvailable && ( <div className="low-stock-warning">⚠️ ONLY {product.stockQty} {product.unit} LEFT!</div> )}
                   
-                  {/* Price Logic Fixed */}
+                  {/* Price */}
                   {product.price && product.price !== '0' && <div className="price-val" style={{fontSize: '1.2rem', fontWeight: '800', color: '#e46338', margin: '5px 0'}}>₹{product.price}</div>}
                   
+                  {/* Description */}
                   <p className="card-desc" style={{ fontSize: '0.85rem', marginBottom: '15px', color:'#555', lineHeight:'1.5' }}>{product.desc}</p>
 
                   <div style={{ marginTop: 'auto' }}>
