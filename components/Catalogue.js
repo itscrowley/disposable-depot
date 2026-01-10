@@ -166,7 +166,7 @@ export default function Catalogue() {
     return [...uniqueCats, 'All'];
   }, [items]);
 
-  // FINAL FILTER LOGIC
+  // FINAL FILTER LOGIC: Show EVERYTHING in 'All'
   const filteredItems = items.filter(item => {
     const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
     const matchesSubCategory = activeSubCategory === 'All' || 
@@ -238,8 +238,13 @@ export default function Catalogue() {
         :root {
           --cat-bg: #f8f9fa; --cat-title: #333333; --cat-sub: #666666;
           --card-bg: #ffffff; --card-border: #eeeeee; --card-shadow: rgba(0,0,0,0.05);
-          --card-title: #222222; --card-desc: #666666; --btn-bg-inactive: #ffffff;
-          --btn-text-inactive: #444444; --btn-border: #e0e0e0;
+          --card-title: #222222; --card-desc: #666666; 
+          
+          /* Pagination Variables Light Mode */
+          --btn-bg-inactive: #ffffff;
+          --btn-text-inactive: #444444; 
+          --btn-border: #e0e0e0;
+          
           --disclaimer-color: #999999;
         }
 
@@ -248,8 +253,12 @@ export default function Catalogue() {
           --cat-sub: #94A3B8 !important; --card-bg: #1E293B !important; 
           --card-border: #334155 !important; --card-shadow: rgba(0,0,0,0.4) !important;
           --card-title: #F1F5F9 !important; --card-desc: #CBD5E1 !important;
-          --btn-bg-inactive: #1E293B !important; --btn-text-inactive: #E2E8F0 !important;
+          
+          /* Pagination Variables Dark Mode */
+          --btn-bg-inactive: #1E293B !important; 
+          --btn-text-inactive: #F1F5F9 !important; 
           --btn-border: #475569 !important;
+          
           --disclaimer-color: #94A3B8 !important;
         }
 
@@ -298,19 +307,25 @@ export default function Catalogue() {
             line-height: 1.5;
         }
 
+        /* 🔥 PAGINATION FIXED STYLES */
         .pagination-container {
             display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 40px; flex-wrap: wrap;
         }
         .page-btn {
-            padding: 8px 14px; border-radius: 8px; border: 1px solid var(--card-border);
-            background: var(--card-bg); color: var(--card-title); cursor: pointer; font-weight: 600;
+            padding: 8px 14px; border-radius: 8px; 
+            border: 1px solid var(--btn-border);
+            background: var(--btn-bg-inactive); 
+            color: var(--btn-text-inactive); 
+            cursor: pointer; font-weight: 600;
             transition: all 0.2s ease;
         }
         .page-btn:hover:not(:disabled) {
             border-color: #e46338; color: #e46338;
         }
         .page-btn.active {
-            background: #e46338; color: white; border-color: #e46338;
+            background: #e46338 !important; 
+            color: white !important; 
+            border-color: #e46338 !important;
         }
         .page-btn:disabled {
             opacity: 0.5; cursor: not-allowed;
@@ -464,21 +479,6 @@ export default function Catalogue() {
           )}
         </div>
 
-        {/* 🔥 MOVED DISCLAIMER TEXT HERE (At Bottom of Section) */}
-        {!loading && currentItems.length > 0 && (
-            <div style={{ 
-                fontSize: '0.75rem', 
-                color: 'var(--disclaimer-color)', /* Dynamic Color */
-                marginTop: '30px', 
-                marginBottom: '10px',
-                textAlign: 'center', 
-                fontStyle: 'italic',
-                width: '100%'
-            }}>
-                Disclaimer : Images are for reference only; product design may vary.
-            </div>
-        )}
-
         {/* PAGINATION UI */}
         {filteredItems.length > itemsPerPage && (
             <div className="pagination-container">
@@ -499,6 +499,21 @@ export default function Catalogue() {
                 <button className="page-btn" onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>
                     <ChevronRight size={20} />
                 </button>
+            </div>
+        )}
+
+        {/* DISCLAIMER TEXT */}
+        {!loading && currentItems.length > 0 && (
+            <div style={{ 
+                fontSize: '0.75rem', 
+                color: 'var(--disclaimer-color)', 
+                marginTop: '30px', 
+                marginBottom: '10px',
+                textAlign: 'center', 
+                fontStyle: 'italic',
+                width: '100%'
+            }}>
+                Images are for reference only; product design may vary.
             </div>
         )}
 
