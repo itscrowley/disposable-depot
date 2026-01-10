@@ -1,0 +1,129 @@
+/* styles/Footer.module.css */
+
+/* --- 1. LAYOUT SETTINGS --- */
+.container {
+    max-width: 1170px;
+    margin: auto;
+    padding: 0 15px;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.footerCol {
+    width: 30%;
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+.footerLogo {
+    font-size: 24px;
+    color: #ff6600 !important;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.footerCol h3 {
+    font-size: 18px;
+    margin-bottom: 35px;
+    font-weight: 600;
+    position: relative;
+}
+.footerCol h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #ff6600;
+    height: 3px;
+    width: 50px;
+}
+.footerCol ul { list-style: none; padding: 0; }
+.footerCol ul li { margin-bottom: 12px; }
+.link {
+    font-size: 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    display: block;
+}
+.link:hover {
+    color: #ff6600 !important;
+    padding-left: 8px;
+}
+.contactInfo li { display: flex; align-items: center; margin-bottom: 15px; }
+.icon { font-size: 18px; color: #ff6600; margin-right: 15px; width: 25px; text-align: center; }
+.socialLinks { display: flex; gap: 12px; }
+.socialIcon {
+    display: flex; justify-content: center; align-items: center;
+    height: 40px; width: 40px; border-radius: 50%;
+    text-decoration: none; transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.socialIcon:hover {
+    background-color: #ff6600 !important;
+    color: #fff !important;
+    transform: translateY(-3px);
+}
+.footerBottom {
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   2. LIGHT MODE (STRONG ORANGE GRADIENT)
+   ========================================= */
+/* Ye code Default hai (Light mode ke liye) */
+.footer {
+    /* Strong Gradient: White se Orange ki taraf */
+    background: linear-gradient(180deg, #ffffff 0%, #ffe0b2 100%) !important;
+    
+    /* Text Color Dark */
+    color: #333333 !important;
+    
+    padding: 70px 0 0;
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+.footerCol h3 { color: #222 !important; }
+.text, .link, .contactInfo li { color: #444 !important; }
+.socialIcon { 
+    background-color: #fff !important; 
+    color: #ff6600 !important;
+}
+.footerBottom { background-color: rgba(255, 165, 0, 0.1) !important; color: #666 !important; }
+
+
+/* =========================================
+   3. DARK MODE (Only overrides if System is Dark)
+   ========================================= */
+@media (prefers-color-scheme: dark) {
+    .footer {
+        background: #1a1a1a !important; /* Pure Dark Grey */
+        background-image: none !important; /* Gradient hatao */
+        color: #ffffff !important;
+    }
+
+    .footerCol h3 { color: #ffffff !important; }
+    .text, .link, .contactInfo li { color: #bbbbbb !important; }
+    
+    .socialIcon { 
+        background-color: rgba(255, 255, 255, 0.1) !important; 
+        color: #fff !important; 
+    }
+    
+    .footerBottom { background-color: #111111 !important; color: #888 !important; }
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+    .footerCol { width: 100%; text-align: center; }
+    .footerCol h3::before { left: 50%; transform: translateX(-50%); }
+    .contactInfo li { justify-content: center; }
+    .socialLinks { justify-content: center; }
+
+ }
