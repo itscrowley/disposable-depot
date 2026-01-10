@@ -1,10 +1,10 @@
 // app/admin/components/ProductForm.js
 import React from 'react';
-import { ChevronDown, Settings, Image as ImageIcon, Trash2, CheckCircle, Loader2 } from 'lucide-react';
+import { ChevronDown, Settings, Image as ImageIcon, Trash2, CheckCircle, Loader2, Sparkles } from 'lucide-react';
 
 export default function ProductForm({ state, actions, theme }) {
   const { darkMode, existingProducts, formData, categories, tags, badges, icons, isEditMode, isDuplicateId, loading, progress, previewUrls, fileInputRef } = state;
-  const { handleChange, openListManager, handleImageChange, removeImage, handleSubmit, handleDelete } = actions;
+  const { handleChange, openListManager, handleImageChange, removeImage, handleSubmit, handleDelete, generateAutoContent } = actions;
 
   return (
     <>
@@ -14,14 +14,13 @@ export default function ProductForm({ state, actions, theme }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
               <div className="flex justify-between items-center mb-1">
-                  <label className={`block text-[10px] font-bold uppercase tracking-wide ${theme.textSub}`}>Unique ID</label>
+                  <label className={`block text-[10px] font-bold uppercase tracking-wide ${theme.textSub}`}>Unique ID (Auto)</label>
                   <div className="flex items-center gap-2">
                       {isEditMode ? <span className="text-[10px] font-bold text-green-500">Editing ✅</span> : (!isDuplicateId ? <span className="text-[10px] font-bold text-blue-500">New 🆕</span> : <span className="text-[10px] font-bold text-red-500">⚠️ ID Exists</span>)}
                       <button type="button" onClick={() => openListManager("Manage IDs (Select to Edit)", existingProducts.map(p => p.id), 'id')} className={`text-[10px] font-bold flex items-center px-2 py-0.5 rounded border transition-colors ${theme.addNewBtn}`}><Settings size={10} className="mr-1"/> Manage</button>
                   </div>
               </div>
-              <input list="idOptions" type="text" name="id" required value={formData.id} className={`w-full p-3.5 md:p-2 text-base md:text-sm rounded-xl md:rounded-lg outline-none transition-all border ${theme.input} focus:border-orange-500 active:scale-[0.99] transition-transform`} placeholder="Create New or Select..." onChange={handleChange} />
-              <datalist id="idOptions">{existingProducts.map(p => <option key={p.id} value={p.id}>{p.title}</option>)}</datalist>
+              <input type="text" name="id" readOnly value={formData.id} className={`w-full p-3.5 md:p-2 text-base md:text-sm rounded-xl md:rounded-lg outline-none transition-all border ${theme.input} opacity-70 cursor-not-allowed`} />
           </div>
           <div>
               <div className="flex justify-between items-center mb-1"><label className={`block text-[10px] font-bold uppercase tracking-wide ${theme.textSub}`}>Title</label><button type="button" onClick={() => openListManager("Manage Titles (Select to Edit)", existingProducts.map(p => p.title), 'title')} className={`text-[10px] font-bold flex items-center px-2 py-0.5 rounded border transition-colors ${theme.addNewBtn}`}><Settings size={10} className="mr-1"/> Manage</button></div>
@@ -55,6 +54,17 @@ export default function ProductForm({ state, actions, theme }) {
              <div className="flex justify-between items-center mb-1"><label className={`text-[10px] font-bold uppercase tracking-wide ${theme.textSub}`}>Icon</label><button type="button" onClick={() => openListManager("Manage Icons", icons, 'icon')} className={`text-[10px] font-bold flex items-center px-2 py-0.5 rounded border transition-colors ${theme.addNewBtn}`}><Settings size={10} className="mr-1"/> Manage</button></div>
              <div className="relative group"><select name="categoryIcon" value={formData.categoryIcon} onChange={handleChange} className={`w-full p-3.5 md:p-2 text-base md:text-sm pl-10 rounded-xl md:rounded-lg outline-none border appearance-none transition-all duration-300 cursor-pointer ${theme.input} focus:border-orange-500`}>{icons.map((icon) => <option key={icon} className="text-xl bg-white">{icon}</option>)}</select><div className="absolute left-3 top-1/2 -translate-y-1/2 text-lg pointer-events-none">{formData.categoryIcon}</div><ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none group-hover:text-orange-500 transition-colors" /></div>
           </div>
+        </div>
+
+        {/* 🔥 AI AUTO FILL BUTTON HERE */}
+        <div className="flex justify-end -mb-3">
+            <button 
+                type="button" 
+                onClick={generateAutoContent}
+                className="text-[10px] flex items-center gap-1 bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-3 py-1 rounded-full hover:scale-105 transition-transform shadow-md font-bold"
+            >
+                <Sparkles size={12} /> Auto-Fill (AI)
+            </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

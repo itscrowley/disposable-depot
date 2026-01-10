@@ -1,10 +1,10 @@
 // app/admin/components/ListManagerModal.js
 import React from 'react';
-import { X, Plus, Trash2 } from 'lucide-react';
+import { X, Plus, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
 
 export default function ListManagerModal({ state, actions, theme }) {
   const { listManager, newItemInput, darkMode } = state;
-  const { setListManager, setNewItemInput, addItemToList, removeItemFromList, handleListSelect } = actions;
+  const { setListManager, setNewItemInput, addItemToList, removeItemFromList, handleListSelect, moveListItem } = actions;
 
   return (
     <div className="fixed inset-0 z-[100000] flex items-end md:items-center justify-center bg-black/60 backdrop-blur-sm p-0 md:p-4 animate-in fade-in duration-200">
@@ -26,9 +26,18 @@ export default function ListManagerModal({ state, actions, theme }) {
              {listManager.items.length > 0 ? (
                <div className="space-y-2">
                  {listManager.items.map((item, index) => (
-                    <div key={index} className={`flex justify-between items-center p-3.5 md:p-2 rounded-xl md:rounded-lg border active:scale-[0.98] transition-transform ${darkMode ? 'bg-white/5 border-white/5' : 'bg-slate-50 border-slate-200'}`}>
+                    <div key={index} className={`flex items-center gap-2 p-2 rounded-xl md:rounded-lg border active:scale-[0.99] transition-transform ${darkMode ? 'bg-white/5 border-white/5' : 'bg-slate-50 border-slate-200'}`}>
+                       
+                       {/* 🔥 Reorder Arrows (Easy Jugad) */}
+                       {(listManager.type !== 'id' && listManager.type !== 'title') && (
+                         <div className="flex flex-col gap-1">
+                            <button onClick={() => moveListItem(index, 'up')} disabled={index === 0} className={`p-1 rounded hover:bg-white/10 ${index === 0 ? 'opacity-20' : 'text-orange-500'}`}><ArrowUp size={14}/></button>
+                            <button onClick={() => moveListItem(index, 'down')} disabled={index === listManager.items.length - 1} className={`p-1 rounded hover:bg-white/10 ${index === listManager.items.length - 1 ? 'opacity-20' : 'text-orange-500'}`}><ArrowDown size={14}/></button>
+                         </div>
+                       )}
+
                        <span 
-                         className={`text-base md:text-sm break-all ${theme.textMain} ${(listManager.type === 'id' || listManager.type === 'title') ? 'cursor-pointer hover:text-orange-500 underline' : ''}`}
+                         className={`flex-1 text-base md:text-sm break-all ${theme.textMain} ${(listManager.type === 'id' || listManager.type === 'title') ? 'cursor-pointer hover:text-orange-500 underline ml-2' : ''}`}
                          onClick={() => (listManager.type === 'id' || listManager.type === 'title') ? handleListSelect(item) : null}
                        >
                          {item}
